@@ -1,5 +1,4 @@
 import Head from 'next/head'
-import Image from 'next/image'
 import { Inter } from 'next/font/google'
 import styles from '@/styles/Home.module.css'
 import type { NextPage, GetServerSideProps } from 'next';
@@ -23,18 +22,18 @@ const Home: NextPage<HomeProps> = ({ popularMovies }) => {
     const [movies, setMovies] = useState<Movie[]>(popularMovies);
   
     return (
-      <div>
+      <main className={styles.main}>
         <h1 className={inter.className}>Popular Movies</h1>
-        <ul>
+        <div className={styles.movieList}>
           {movies.map((movie) => (
-            <li key={movie.id}>
+            <div key={movie.id} className={styles.movieItem}>
               <img src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`} alt={movie.title} />
               <h2>{movie.title}</h2>
               <p>{movie.overview}</p>
-            </li>
+            </div>
           ))}
-        </ul>
-      </div>
+        </div>
+      </main>
     );
   };
   

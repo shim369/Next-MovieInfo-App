@@ -6,3 +6,15 @@
   padding: 6rem;
   min-height: 100vh;
 }
+
+.movieList {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+
+.movieItem {
+  width: 30%;
+  margin-right: 2%;
+  margin-bottom: 20px;
+}
