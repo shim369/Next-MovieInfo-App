@@ -27,9 +27,9 @@ const Home: NextPage<HomeProps> = ({ popularMovies }) => {
         <div className={styles.movieList}>
           {movies.map((movie) => (
             <div key={movie.id} className={styles.movieItem}>
-              <img src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`} alt={movie.title} />
+              <img src={`https://image.tmdb.org/t/p/w400${movie.poster_path}`} alt={movie.title} />
               <h2>{movie.title}</h2>
-              <p>{movie.overview}</p>
+              {/* <p>{movie.overview}</p> */}
             </div>
           ))}
         </div>
