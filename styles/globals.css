@@ -14,3 +14,17 @@ body {
 h1 {
   margin-bottom: 40px;
 }
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+}
+
+nav a {
+  padding: 5px;
+  margin: 0 10px;
+  text-decoration: none;
+  color: #000;
+}
