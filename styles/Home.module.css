@@ -24,7 +24,7 @@
 
 .searchInput {
   height: 2.4em;
-  width: 50%;
+  width: 70%;
   padding: 0 16px;
   border: none;
   appearance: none;
@@ -38,7 +38,7 @@
 }
 
 .searchButton {
-  width: 40%;
+  width: 20%;
   padding: 8px;
   border: none;
   background: #02b0f9;
