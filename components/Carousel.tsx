@@ -19,7 +19,6 @@ interface CarouselProps {
 }
   
 const Carousel = ({ popularMovies }: CarouselProps) => {
-const IMAGE_BASE_URL = 'https://image.tmdb.org/t/p/w500';
 
 return (
     <Swiper
@@ -42,7 +41,14 @@ return (
     >
       {popularMovies.map(movie => (
         <SwiperSlide key={movie.id}>
-            <img src={`${IMAGE_BASE_URL}${movie.backdrop_path}`} alt={movie.title} />
+          <img
+            src={
+              movie.backdrop_path
+              ? `https://image.tmdb.org/t/p/w500${movie.backdrop_path}`
+              : "/no-image2.jpg"
+            }
+            alt={movie.title}
+          />
         </SwiperSlide>
       ))}
     </Swiper>
