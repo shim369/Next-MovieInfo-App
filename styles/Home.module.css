@@ -11,12 +11,15 @@
 
 .searchBox {
   background: #333;
-  width: 60%;
+  width: 80%;
   padding: 2rem 1rem;
   display: flex;
   justify-content: space-around;
   align-items: center;
   margin: 0 auto 50px;
+  @media (max-width: 480px){
+    width: 100%;
+  }
 }
 
 .searchInput {
