@@ -22,10 +22,10 @@ const Carousel = ({ popularMovies }: CarouselProps) => {
 
 return (
     <Swiper
-      spaceBetween={30}
+      spaceBetween={0}
       slidesPerView={1}
       breakpoints={{
-        320: {
+        480: {
           slidesPerView: 1,
         },
         640: {
@@ -35,6 +35,7 @@ return (
           slidesPerView: 3,
         },
       }}
+      navigation
       pagination={{ clickable: true }}
       autoplay={{ delay: 3000 }}
       loop
