@@ -10,6 +10,7 @@ interface Movie {
   poster_path: string;
   backdrop_path: string;
   release_date: string;
+  homepage?: string;
 }
 
 interface HomeProps {
@@ -28,6 +29,7 @@ const Home: NextPage<HomeProps> = ({ popularMovies }) => {
             <div key={movie.id} className={styles.movieItem}>
               <img src={`https://image.tmdb.org/t/p/w400${movie.poster_path}`} alt={movie.title} />
               <h2>{movie.title}</h2>
+              {movie.homepage && <a href={movie.homepage}>公式サイト</a>}
               <p>{movie.release_date}</p>
               {/* <p>{movie.overview}</p> */}
             </div>

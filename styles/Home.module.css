@@ -12,7 +12,7 @@
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  padding: 6rem;
+  padding: 6rem 1rem;
   min-height: 100vh;
 }
 
@@ -23,15 +23,19 @@
 }
 
 .movieItem {
-  width: 30%;
-  margin: 0 1.65%;
-  margin-bottom: 20px;
+  width: calc(92%/4);
+  margin: 0 1% 20px;
   display: flex;
   flex-direction: column;
+  word-break: break-all;
+  @media (max-width: 480px){
+    width: calc(96%/2);
+    margin: 0 1% 20px;
+  }
 }
 
 .movieItem img {
-  /* max-width: 100%; */
+  max-width: 100%;
   object-fit: cover;
   aspect-ratio: 1/1.5;
 }
