@@ -12,7 +12,12 @@ body {
   font-family: 'Inter', sans-serif;
 }
 
+section {
+  margin-top: 50px;
+}
+
 h1 {
+  text-align: center;
   margin-bottom: 40px;
   color: #02b0f9;
   font-weight: 400;

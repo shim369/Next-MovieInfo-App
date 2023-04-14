@@ -15,10 +15,10 @@ interface Movie {
 }
   
 interface CarouselProps {
-    popularMovies: Movie[];
+    newMovies: Movie[];
 }
   
-const Carousel = ({ popularMovies }: CarouselProps) => {
+const Carousel = ({ newMovies }: CarouselProps) => {
 
 return (
     <Swiper
@@ -40,7 +40,7 @@ return (
       autoplay={{ delay: 3000 }}
       loop
     >
-      {popularMovies.map(movie => (
+      {newMovies.map(movie => (
         <SwiperSlide key={movie.id}>
           <img
             src={
