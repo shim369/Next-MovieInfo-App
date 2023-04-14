@@ -64,6 +64,7 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
+  margin-top: 50px;
 }
 
 .movieItem {
