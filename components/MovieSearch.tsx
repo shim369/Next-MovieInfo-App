@@ -12,12 +12,20 @@ interface Movie {
 
 const MovieSearch: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState('');
+  const [loading, setLoading] = useState(false);
   const [movies, setMovies] = useState<Movie[]>([]);
 
   const searchMovies = async () => {
-    const response = await fetch(`/api/searchMovies?term=${searchTerm}`);
-    const data = await response.json();
-    setMovies(data);
+    setLoading(true);
+    try {
+      const response = await fetch(`/api/searchMovies?term=${searchTerm}`);
+      const data = await response.json();
+      setMovies(data);
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -32,6 +40,9 @@ const MovieSearch: React.FC = () => {
             />
             <button onClick={searchMovies} className={styles.searchButton}>Search</button>
         </div>
+      {loading ? (
+        <div className={styles.movieLoading}>Loading...</div>
+      ) : (
         <div className={styles.movieList}>
             {movies && movies.map((movie) => (
             <div key={movie.id} className={styles.movieItem}>
@@ -44,11 +55,11 @@ const MovieSearch: React.FC = () => {
                     alt={movie.title}
                 />
                 <h2>{movie.title}</h2>
-                {movie.homepage && <a href={movie.homepage}>公式サイト</a>}
                 <p>{formatDate(movie.release_date)}</p>
             </div>
             ))}
         </div>
+      )}
     </>
   );
 };
