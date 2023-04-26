@@ -74,7 +74,7 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
-  margin-top: 50px;
+  /* margin-top: 50px; */
 }
 
 .movieItem {
@@ -124,7 +124,7 @@
 .movieLoading {
   margin-top: 30px;
   color: #02b0f9;
-  font-size: 2em;
+  font-size: 1.3em;
 }
 
 .movieNothing {
@@ -152,13 +152,13 @@
   background-color: rgba(0, 0, 0, 0.8);
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
 }
 
 .modalContent {
   position: relative;
   background-color: #000;
-  margin: 0 auto;
+  margin: 50px auto;
   width: 80%;
   max-width: 800px;
   display: flex;
@@ -166,8 +166,7 @@
   align-items: center;
   flex-direction: column;
   @media (max-width: 480px){
-    width: 90%;
-    margin: 40px auto 0;
+    width: 94%;
   }
 }
 
@@ -179,10 +178,10 @@
 }
 
 .modalText {
-  padding: 20px;
+  padding: 20px 20px 40px;
   width: 100%;
   @media (max-width: 480px){
-    padding: 10px 2%;
+    padding: 0px 20px 20px;
   }
 }
 
@@ -203,8 +202,8 @@
   background: transparent;
   border: none;
   @media (max-width: 480px){
-    top: 5px;
-    right: 5px;
+    top: 10px;
+    right: 10px;
   }
 }
 

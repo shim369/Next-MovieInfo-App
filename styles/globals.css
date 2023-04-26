@@ -14,6 +14,9 @@ body {
 
 section {
   margin-top: 50px;
+  @media (max-width: 480px){
+    margin-top: 30px;
+  }
 }
 
 h1 {
@@ -21,6 +24,9 @@ h1 {
   margin-bottom: 40px;
   color: #02b0f9;
   font-weight: 400;
+  @media (max-width: 480px){
+    margin-bottom: 20px;
+  }
 }
 
 header {
@@ -29,6 +35,9 @@ header {
   align-items: center;
   padding: 20px;
   background: #fff;
+  @media (max-width: 480px){
+    padding: 14px;
+  }
 }
 
 .swiper-container {
@@ -42,4 +51,11 @@ header {
 .swiper-slide img {
   max-width: 100%;
   height: auto;
+}
+
+footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px 0;
 }

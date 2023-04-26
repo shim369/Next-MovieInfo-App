@@ -72,6 +72,9 @@ const Home: NextPage<HomeProps> = ({ newMovies, popularMovies }) => {
         </div>
         </section>
       </main>
+      <footer>
+        ©️ 2023 Movie Info App
+      </footer>
       {selectedMovie && (
         <Modal movie={selectedMovie} onClose={handleCloseModal} />
       )}
