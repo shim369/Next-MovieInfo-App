@@ -1,26 +1,34 @@
+import { useState } from 'react';
 import styles from '@/styles/Home.module.css'
 import type { NextPage, GetServerSideProps } from 'next'
 import Carousel from '../components/Carousel'
 import Header from '../components/Header'
 import MovieSearch from '../components/MovieSearch'
-import { formatDate } from '../utils/dateUtils'
-  
-interface Movie {
-  id: number;
-  title: string;
-  overview: string;
-  poster_path: string;
-  backdrop_path: string;
-  release_date: string;
-  homepage?: string;
-}
+import { fetchMovieDetails } from '../utils/fetchMovieDetails';
+import { MovieDetails } from '../utils/types';
+import Modal from '../components/Modal';
+
 
 interface HomeProps {
-  newMovies: Movie[];
-  popularMovies: Movie[];
+  newMovies: MovieDetails[];
+  popularMovies: MovieDetails[];
 }
 
 const Home: NextPage<HomeProps> = ({ newMovies, popularMovies }) => {
+  const [selectedMovie, setSelectedMovie] = useState<MovieDetails | null>(null);
+
+  const handleMovieClick = async (id: number) => {
+    try {
+      const data = await fetchMovieDetails(id);
+      setSelectedMovie(data);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const handleCloseModal = () => {
+    setSelectedMovie(null);
+  };
     return (
       <>
       <Header />
@@ -28,7 +36,7 @@ const Home: NextPage<HomeProps> = ({ newMovies, popularMovies }) => {
       <main className={styles.main}>
         <MovieSearch />
         <section>
-        <h1 className="font-inter">New Movies</h1>
+        <h1 className="font-inter">新着映画</h1>
         <div className={styles.movieList}>
           {newMovies.map((movie) => (
             <div key={movie.id} className={styles.movieItem}>
@@ -39,15 +47,14 @@ const Home: NextPage<HomeProps> = ({ newMovies, popularMovies }) => {
                   : "/no-image.jpg"
                 }
                 alt={movie.title}
+                onClick={() => handleMovieClick(movie.id)}
               />
-              <h2>{movie.title}</h2>
-              <p>{formatDate(movie.release_date)}</p>
             </div>
           ))}
         </div>
         </section>
         <section>
-        <h1 className="font-inter">Popular Movies</h1>
+        <h1 className="font-inter">人気映画</h1>
         <div className={styles.movieList}>
           {popularMovies.map((movie) => (
             <div key={movie.id} className={styles.movieItem}>
@@ -58,14 +65,16 @@ const Home: NextPage<HomeProps> = ({ newMovies, popularMovies }) => {
                   : "/no-image.jpg"
                 }
                 alt={movie.title}
+                onClick={() => handleMovieClick(movie.id)}
               />
-              <h2>{movie.title}</h2>
-              <p>{formatDate(movie.release_date)}</p>
             </div>
           ))}
         </div>
         </section>
       </main>
+      {selectedMovie && (
+        <Modal movie={selectedMovie} onClose={handleCloseModal} />
+      )}
       </>
     );
   };

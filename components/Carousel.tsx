@@ -3,19 +3,12 @@ import SwiperCore, { Pagination, Navigation, Autoplay } from 'swiper';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
+import { MovieDetails } from '../utils/types';
 
 SwiperCore.use([Pagination, Navigation, Autoplay]);
-interface Movie {
-    id: number;
-    title: string;
-    overview: string;
-    poster_path: string;
-    backdrop_path: string;
-    release_date: string;
-}
   
 interface CarouselProps {
-    newMovies: Movie[];
+    newMovies: MovieDetails[];
 }
   
 const Carousel = ({ newMovies }: CarouselProps) => {
@@ -49,6 +42,8 @@ return (
               : "/no-image2.jpg"
             }
             alt={movie.title}
+            width="480"
+            height="270"
           />
         </SwiperSlide>
       ))}

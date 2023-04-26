@@ -3,6 +3,13 @@
   font-weight: 400;
   color: #02b0f9;
   text-decoration: none;
+  @media (max-width: 480px){
+    font-size: 1.5em;
+  }
+}
+
+.searchForm {
+  width: 100%;
 }
 
 .searchBox {
@@ -10,7 +17,7 @@
   width: 80%;
   padding: 2rem 1rem;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-evenly;
   align-items: center;
   margin: 0 auto;
   @media (max-width: 480px){
@@ -34,8 +41,8 @@
 }
 
 .searchButton {
+  height: 2.4em;
   width: 20%;
-  padding: 8px;
   border: none;
   background: #02b0f9;
   color: #fff;
@@ -58,6 +65,9 @@
   align-items: center;
   padding: 3rem 1rem;
   min-height: 100vh;
+  @media (max-width: 480px){
+    padding: 1rem 2%;
+  }
 }
 
 .movieList {
@@ -69,7 +79,7 @@
 
 .movieItem {
   width: calc(92%/4);
-  margin: 0 1% 20px;
+  margin: 0 1% 30px;
   display: flex;
   flex-direction: column;
   word-break: break-all;
@@ -81,17 +91,131 @@
 
 .movieItem img {
   max-width: 100%;
+  height: auto;
   object-fit: cover;
   aspect-ratio: 1/1.5;
+}
+
+.movieItem img:hover {
+  cursor: pointer;
+  opacity: .8;
 }
 
 .movieItem h2 {
   margin: 10px 0;
   font-size: 1em;
+  min-height: 50px;
+}
+
+.movieItem button {
+  margin-top: 10px;
+  padding: 8px;
+  border: none;
+  background: #02b0f9;
+  color: #fff;
+  font-weight: bold;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  cursor: pointer;
+  border: 2px solid transparent;
 }
 
 .movieLoading {
   margin-top: 30px;
   color: #02b0f9;
   font-size: 2em;
+}
+
+.movieNothing {
+  margin-top: 30px;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+}
+
+.modal {
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modalContent {
+  position: relative;
+  background-color: #000;
+  margin: auto;
+  width: 80%;
+  max-width: 800px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 40px;
+  @media (max-width: 480px){
+    width: 90%;
+  }
+}
+
+.modalContent img, .modalContent iframe {
+  width: 100%;
+  height: 350px;
+  object-fit: cover;
+  border: none;
+}
+
+.modalText {
+  padding: 20px;
+  width: 100%;
+  @media (max-width: 480px){
+    padding: 10px 2%;
+  }
+}
+
+.modalText h2,.modalText p {
+  margin-top: 10px;
+  color: #fff;
+}
+
+.modalOverview {
+  margin-bottom: 30px;
+}
+
+.closeButton {
+  cursor: pointer;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: transparent;
+  border: none;
+  @media (max-width: 480px){
+    top: 5px;
+    right: 5px;
+  }
+}
+
+.closeButton span {
+  color: #fff;
+  background: transparent;
+  font-size: 30px;
+  border: none;
+}
+
+.closeButton:hover,
+.closeButton:focus {
+  opacity: .8;
 }
