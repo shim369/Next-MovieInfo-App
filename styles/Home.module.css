@@ -158,16 +158,16 @@
 .modalContent {
   position: relative;
   background-color: #000;
-  margin: auto;
+  margin: 0 auto;
   width: 80%;
   max-width: 800px;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  margin-top: 40px;
   @media (max-width: 480px){
     width: 90%;
+    margin: 40px auto 0;
   }
 }
 
