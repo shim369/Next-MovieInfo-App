@@ -181,6 +181,7 @@
 .modalText {
   padding: 20px 20px 40px;
   width: 100%;
+  color: #fff;
   @media (max-width: 480px){
     padding: 0px 20px 20px;
   }
@@ -188,7 +189,14 @@
 
 .modalText h2,.modalText p {
   margin-top: 10px;
-  color: #fff;
+}
+
+.productionCountries {
+  margin-top: 10px;
+}
+
+.cast {
+  margin-top: 10px;
 }
 
 .modalOverview {

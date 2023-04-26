@@ -78,4 +78,7 @@ export interface Movie {
     videos: {
       results: Video[];
     };
+    credits: {
+      cast: Cast[];
+    };
   }

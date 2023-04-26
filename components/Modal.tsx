@@ -1,5 +1,5 @@
 import styles from '@/styles/Home.module.css'
-import { MovieDetails, Video } from '@/utils/types'
+import { MovieDetails, Video, Cast } from '@/utils/types'
 import { formatDate } from '@/utils/dateUtils'
 
 
@@ -54,6 +54,23 @@ const Modal: React.FC<ModalProps> = ({ movie, onClose }) => {
           <div className={styles.modalText}>
             <h2>{movie.title}</h2>
             <p className={styles.modalOverview}>{movie.overview}</p>
+            <div className={styles.productionCountries}>
+              <p>製作国:&nbsp;
+                {movie.production_countries.map((country) => (
+                  <span key={country.iso_3166_1}>{country.name}</span>
+                ))}
+              </p>
+            </div>
+
+            <div className={styles.cast}>
+              <p>キャスト:&nbsp;
+              {movie.credits.cast.slice(0, 10).map((castMember: Cast) => (
+                <span key={castMember.id}>
+                  {castMember.name} as {castMember.character}&nbsp;,&nbsp;
+                </span>
+              ))}
+              </p>
+            </div>
             <p>
               ジャンル: {" "}
               {movie.genres.map((genre) => genre.name).join(", ")}
