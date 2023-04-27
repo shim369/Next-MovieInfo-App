@@ -54,29 +54,17 @@ const Modal: React.FC<ModalProps> = ({ movie, onClose }) => {
           <div className={styles.modalText}>
             <h2>{movie.title}</h2>
             <p className={styles.modalOverview}>{movie.overview}</p>
-            <div className={styles.productionCountries}>
-              <p>製作国:&nbsp;
-                {movie.production_countries.map((country) => (
-                  <span key={country.iso_3166_1}>{country.name}</span>
-                ))}
-              </p>
-            </div>
-
-            <div className={styles.cast}>
-              <p>キャスト:&nbsp;
-              {movie.credits.cast.slice(0, 10).map((castMember: Cast) => (
-                <span key={castMember.id}>
-                  {castMember.name} as {castMember.character}&nbsp;,&nbsp;
-                </span>
-              ))}
-              </p>
-            </div>
-            <p>
-              ジャンル: {" "}
-              {movie.genres.map((genre) => genre.name).join(", ")}
+            <p className={styles.cast}>キャスト:&nbsp;
+            {movie.credits.cast.slice(0, 10).map((castMember: Cast) => 
+              castMember.name
+            ).join(", ")}
             </p>
-            <p>上映時間: {movie.runtime} 分</p>
+            <p>ジャンル:&nbsp;{movie.genres.map((genre) => genre.name).join(", ")}</p>
+            <p>上映時間: {movie.runtime}分</p>
             <p>リリース日: {formatDate(movie.release_date)}</p>
+            <p className={styles.productionCountries}>製作国:&nbsp;
+              {movie.production_countries.map((country) => country.name).join(", ")}
+            </p>
           </div>
         </div>
       </div>

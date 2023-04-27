@@ -188,19 +188,19 @@
 }
 
 .modalText h2,.modalText p {
-  margin-top: 10px;
+  margin-bottom: 20px;
 }
 
 .productionCountries {
-  margin-top: 10px;
+  margin-bottom: 20px;
 }
 
 .cast {
-  margin-top: 10px;
+  margin-bottom: 20px;
 }
 
 .modalOverview {
-  margin-bottom: 30px;
+  margin-bottom: 20px;
 }
 
 .closeButton {
