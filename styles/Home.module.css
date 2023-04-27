@@ -84,8 +84,8 @@
   flex-direction: column;
   word-break: break-all;
   @media (max-width: 1920px){
-    width: calc(98%/8);
-    margin: 0 1% 20px;
+    width: calc(84%/8);
+    margin: 0 0 20px;
   }
   @media (max-width: 480px){
     width: calc(98%/2);
