@@ -18,10 +18,10 @@ return (
       spaceBetween={0}
       slidesPerView={1}
       breakpoints={{
-        400: {
+        380: {
           slidesPerView: 1,
         },
-        640: {
+        500: {
           slidesPerView: 2,
         },
         960: {
