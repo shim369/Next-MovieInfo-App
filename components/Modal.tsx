@@ -59,9 +59,9 @@ const Modal: React.FC<ModalProps> = ({ movie, onClose }) => {
               castMember.name
             ).join(", ")}
             </p>
-            <p>ジャンル:&nbsp;{movie.genres.map((genre) => genre.name).join(", ")}</p>
-            <p>上映時間: {movie.runtime}分</p>
-            <p>リリース日: {formatDate(movie.release_date)}</p>
+            <p className={styles.genres}>ジャンル:&nbsp;{movie.genres.map((genre) => genre.name).join(", ")}</p>
+            <p className={styles.runtime}>上映時間: {movie.runtime}分</p>
+            <p className={styles.date}>リリース日: {formatDate(movie.release_date)}</p>
             <p className={styles.productionCountries}>製作国:&nbsp;
               {movie.production_countries.map((country) => country.name).join(", ")}
             </p>

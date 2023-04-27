@@ -187,20 +187,32 @@
   }
 }
 
-.modalText h2,.modalText p {
+.modalText h2 {
   margin-bottom: 20px;
 }
 
-.productionCountries {
-  margin-bottom: 0;
+.modalOverview {
+  margin-bottom: 20px;
 }
 
 .cast {
   margin-bottom: 20px;
 }
 
-.modalOverview {
+.genres {
   margin-bottom: 20px;
+}
+
+.runtime {
+  margin-bottom: 20px;
+}
+
+.date {
+  margin-bottom: 20px;
+}
+
+.productionCountries {
+  margin-bottom: 0;
 }
 
 .closeButton {
