@@ -83,8 +83,12 @@
   display: flex;
   flex-direction: column;
   word-break: break-all;
-  @media (max-width: 1920px){
+  @media (min-width: 1920px){
     width: calc(84%/8);
+    margin: 0 0 20px;
+  }
+  @media (max-width: 1600px){
+    width: calc(92%/4);
     margin: 0 0 20px;
   }
   @media (max-width: 480px){
