@@ -27,6 +27,15 @@ return (
         960: {
           slidesPerView: 3,
         },
+        1280: {
+          slidesPerView: 4,
+        },
+        1600: {
+          slidesPerView: 5,
+        },
+        1920: {
+          slidesPerView: 6,
+        },
       }}
       navigation
       pagination={{ clickable: true }}
