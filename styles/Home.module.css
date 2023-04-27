@@ -74,7 +74,19 @@
 .movieList {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: flex-start;
+}
+
+@media (max-width: 1600px){
+  .movieList  {
+    justify-content: flex-start;
+  }
+}
+
+@media (max-width: 480px){
+  .movieList  {
+    justify-content: space-between;
+  }
 }
 
 .movieItem {
@@ -88,14 +100,14 @@
 @media (max-width: 1920px){
   .movieItem {
     width: calc(84%/8);
-    margin: 0 0 20px;
+    margin: 0 1% 20px;
   }
 }
 
 @media (max-width: 1600px){
   .movieItem {
     width: calc(92%/4);
-    margin: 0 0 20px;
+    margin: 0 1% 20px;
   }
 }
 
