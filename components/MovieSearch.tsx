@@ -67,7 +67,7 @@ const MovieSearch: React.FC = () => {
             <div key={movie.id} className={styles.movieItem}>
               <img
                 src={
-                  movie.poster_path
+                  movie.poster_path && movie.poster_path !== 'null' && movie.poster_path.trim() !== ''
                     ? `https://image.tmdb.org/t/p/w400${movie.poster_path}`
                     : "/no-image.jpg"
                 }

@@ -44,11 +44,13 @@ const Modal: React.FC<ModalProps> = ({ movie, onClose }) => {
           ) : (
             <img
               src={
-                movie.poster_path
+                movie.backdrop_path && movie.backdrop_path !== 'null' && movie.backdrop_path.trim() !== ''
                   ? `https://image.tmdb.org/t/p/w500${movie.backdrop_path}`
-                  : "/no-image.jpg"
+                  : "/no-image2.jpg"
               }
               alt={movie.title}
+              width="800"
+              height="350"
             />
           )}
           <div className={styles.modalText}>
