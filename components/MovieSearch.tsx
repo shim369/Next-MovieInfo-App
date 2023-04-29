@@ -68,7 +68,7 @@ const MovieSearch: React.FC = () => {
               <img
                 src={
                   movie.poster_path
-                    ? `https://image.tmdb.org/t/p/w200${movie.poster_path}`
+                    ? `https://image.tmdb.org/t/p/w400${movie.poster_path}`
                     : "/no-image.jpg"
                 }
                 alt={movie.title}
