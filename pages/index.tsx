@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import Head from 'next/head';
 import styles from '@/styles/Home.module.css'
 import type { NextPage, GetServerSideProps } from 'next'
 import Carousel from '../components/Carousel'
@@ -31,6 +32,9 @@ const Home: NextPage<HomeProps> = ({ newMovies, popularMovies }) => {
   };
     return (
       <>
+      <Head>
+        <title>Movie Info App</title>
+      </Head>
       <Header />
       <Carousel newMovies={newMovies} />
       <main className={styles.main}>
