@@ -73,6 +73,8 @@ const MovieSearch: React.FC = () => {
                 }
                 alt={movie.title}
                 onClick={() => handleMovieClick(movie.id)}
+                width="324"
+                height="486"
               />
               {/* <h2>{movie.title}</h2>
               <p>{formatDate(movie.release_date)}</p>

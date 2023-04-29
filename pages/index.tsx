@@ -52,6 +52,8 @@ const Home: NextPage<HomeProps> = ({ newMovies, popularMovies }) => {
                 }
                 alt={movie.title}
                 onClick={() => handleMovieClick(movie.id)}
+                width="324"
+                height="486"
               />
             </div>
           ))}
@@ -70,6 +72,8 @@ const Home: NextPage<HomeProps> = ({ newMovies, popularMovies }) => {
                 }
                 alt={movie.title}
                 onClick={() => handleMovieClick(movie.id)}
+                width="324"
+                height="486"
               />
             </div>
           ))}
