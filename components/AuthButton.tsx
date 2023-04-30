@@ -1,6 +1,7 @@
 import { useSession, signIn, signOut } from "next-auth/react"
 import { useRouter } from "next/router";
 import { useEffect } from "react";
+import styles from '@/styles/Home.module.css'
 
 export default function AuthButton() {
   const { data: session, status } = useSession();
@@ -20,13 +21,13 @@ export default function AuthButton() {
   if (session) {
     return (
       <>
-        <button onClick={() => signOut()}>Sign out</button>
+        <button className={styles.authButton} onClick={() => signOut()}>Sign out</button>
       </>
     )
   }
   return (
     <>
-      <button onClick={() => signIn()}>Sign in</button>
+      <button className={styles.authButton} onClick={() => signIn()}>Sign in</button>
     </>
   )
 }

@@ -41,6 +41,21 @@
     box-shadow: 0 0 0 2px rgb(33, 150, 243) inset;
 }
 
+.authButton {
+  padding: 10px 20px;
+  background: #02b0f9;
+  color: #fff;
+  font-weight: bold;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  cursor: pointer;
+  border: 2px solid transparent;
+}
+
+.authButton:hover {
+  background: #0199da;
+}
 .searchButton {
   height: 2.4em;
   width: 20%;
