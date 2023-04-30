@@ -1,7 +1,14 @@
-import { useSession, signIn, signOut } from "next-auth/react"
+import { useSession, signIn, signOut } from "next-auth/react";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
-import styles from '@/styles/Home.module.css'
+import styles from '@/styles/Home.module.css';
+
+type SessionUser = {
+  id: string;
+  name?: string | null;
+  email?: string | null;
+  image?: string | null;
+};
 
 export default function AuthButton() {
   const { data: session, status } = useSession();
@@ -9,15 +16,14 @@ export default function AuthButton() {
 
   useEffect(() => {
     if (status === "authenticated") {
-      router.push("/testAfterAuth");
+      router.push(`/user/${(session?.user as SessionUser)?.id}`);
     } else if (status === "loading") {
       // Loadingの時は何も表示しない
     } else {
       router.push("/");
     }
-  }, [status, router]);
-  
-  
+  }, [status, router, session]);
+
   if (session) {
     return (
       <>
