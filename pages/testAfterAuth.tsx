@@ -2,6 +2,7 @@ import { getSession } from "next-auth/react"
 import { GetServerSideProps } from "next"
 import Head from 'next/head'
 import Header from '../components/Header'
+import styles from '@/styles/Home.module.css'
 
 const TestAfterAuth = () => {
   return  (
@@ -10,7 +11,9 @@ const TestAfterAuth = () => {
         <title>After Auth</title>
       </Head>
       <Header />
-      <div>Test After Auth</div>
+      <main className={styles.main}>
+        <div>Test After Auth</div>
+      </main>
     </>
   )
 };
