@@ -11,7 +11,7 @@ export default function AuthButton() {
     if (status === "authenticated") {
       router.push("/testAfterAuth");
     } else if (status === "loading") {
-      return;
+      // Loadingの時は何も表示しない
     } else {
       router.push("/");
     }
@@ -25,6 +25,17 @@ export default function AuthButton() {
       </>
     )
   }
+
+  if (status === "loading") {
+    return (
+      <>
+        <div className={styles.loadingOverlay}>
+          <div className={styles.loadingText}>Loading...</div>
+        </div>
+      </>
+    )
+  }
+
   return (
     <>
       <button className={styles.authButton} onClick={() => signIn()}>Sign in</button>
