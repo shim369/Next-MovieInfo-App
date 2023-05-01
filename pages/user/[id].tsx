@@ -21,7 +21,7 @@ const UserProfile = () => {
         <Header />
         <main className={styles.main}>
             <div>
-                <p>User Profile: {id}</p>
+                <p>User Id: {id}</p>
                 <p>Welcome, {session.user.name}!</p>
             </div>
         </main>

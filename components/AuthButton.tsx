@@ -14,15 +14,15 @@ export default function AuthButton() {
   const { data: session, status } = useSession();
   const router = useRouter();
 
-  useEffect(() => {
-    if (status === "authenticated") {
-      router.push(`/user/${(session?.user as SessionUser)?.id}`);
-    } else if (status === "loading") {
-      // Loadingの時は何も表示しない
-    } else {
-      router.push("/");
-    }
-  }, [status, router, session]);
+  // useEffect(() => {
+  //   if (status === "authenticated") {
+  //     router.push(`/user/${encodeURIComponent((session?.user as SessionUser)?.id)}`);
+  //   } else if (status === "loading") {
+  //     return
+  //   } else {
+  //     router.push("/");
+  //   }
+  // }, [status, router, session]);
 
   if (session) {
     return (

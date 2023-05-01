@@ -49,12 +49,12 @@
   appearance: none;
   -webkit-appearance: none;
   -moz-appearance: none;
-  cursor: pointer;
   border: 2px solid transparent;
 }
 
 .authButton:hover {
   background: #0199da;
+  cursor: pointer;
 }
 .searchButton {
   height: 2.4em;
@@ -297,7 +297,7 @@
 }
 
 .loadingText {
-  color: #ffffff; /* 白文字 */
+  color: #fff;
   font-size: 2rem;
   font-weight: bold;
 }
