@@ -1,3 +1,12 @@
+このアプリはNext.jsの学習のために作成中のものです。
+今後の作業方針として、NextAuthで認証機能作成するか、Suapabaseで作成するか試していますが、
+Supabaseで認証機能とDBを利用して認証後のページを作り込んでいきます。
+認証後のコンテンツは主に、ユーザーのプロフィール登録、映画へのいいね付け、もしくは点数付け、
+など思いついたら、追加していきます。
+特定のチュートリアルに沿って作っているわけではないので、作業しながら、ググりながら機能追加していきます。
+でも割と世界中でみんな似たようなことやってますね。参考にしつつという感じです。
+---
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
