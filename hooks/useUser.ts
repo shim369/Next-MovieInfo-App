@@ -17,13 +17,13 @@ export default function useUser() {
       if (event === "SIGNED_IN") {
         const userId = session?.user?.id;
         if (userId) {
-          router.push(`/user/${userId}`);
+          router.push(`${window.location.origin}/user/${userId}`);
         }
       } else if (event === "SIGNED_OUT") {
-        router.push('/');
+        router.push(window.location.origin);
       }
     });
-  
+
     return () => {
       if (authListener) {
         authListener.subscription.unsubscribe();
