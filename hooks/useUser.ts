@@ -19,6 +19,8 @@ export default function useUser() {
         if (userId) {
           router.push(`/user/${userId}`);
         }
+      } else if (event === "SIGNED_OUT") {
+        router.push('/');
       }
     });
   
@@ -28,7 +30,6 @@ export default function useUser() {
       }
     };
   }, []);
-  
   
   async function signInWithGoogle() {
     const { error } = await supabase.auth.signInWithOAuth({
