@@ -1,16 +1,15 @@
 import styles from '@/styles/Home.module.css'
 import useUser from "../hooks/useUser";
+import Link from 'next/link';
 
 const Header = () => {
     const { session, signOut, signInWithGoogle } = useUser();
 
     return (
         <header>
-            <a href="/" className={styles.logo}>Movie Info App</a>
+            <Link href="/" className={styles.logo}>Movie Info App</Link>
             {session ? (
-                <div>
-                    <button className={styles.authButton} onClick={() => signOut()}>サインアウト</button>
-                </div>
+                 <button className={styles.authButton} onClick={() => signOut()}>サインアウト</button>
             ) : (
                 <button className={styles.authButton} onClick={() => signInWithGoogle()}>Googleでログイン</button>
             )}
