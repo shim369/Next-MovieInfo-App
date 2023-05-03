@@ -8,6 +8,7 @@ export default function useUser() {
   const [user, setUser] = useState<User | null>(null);
   const router = useRouter();
   
+  const VERCEL_URL = process.env.NEXT_PUBLIC_VERCEL_URL;
 
   useEffect(() => {
     const { data: authListener } = supabase.auth.onAuthStateChange(async (event, session) => {
@@ -17,11 +18,16 @@ export default function useUser() {
       if (event === "SIGNED_IN") {
         const userId = session?.user?.id;
         if (userId) {
-          router.push(`${window.location.origin}/user/${userId}`);
+          const origin = window.location.origin || '';
+          router.push(`${origin}/user/${userId}`);
         }
       } else if (event === "SIGNED_OUT") {
-        router.push(window.location.origin);
-      }
+        if (VERCEL_URL) {
+          router.push(VERCEL_URL);
+        } else {
+          router.push('/');
+        }
+      }      
     });
 
     return () => {
