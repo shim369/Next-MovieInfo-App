@@ -15,7 +15,7 @@ const Header = () => {
         <header>
             {logo}
             {session ? (
-                <button className={styles.authButton} onClick={() => signOut()}>サインアウト</button>
+                <button className={styles.authButton} onClick={() => signOut()}>ログアウト</button>
             ) : (
                 <button className={styles.authButton} onClick={() => signInWithGoogle()}>Googleでログイン</button>
             )}
