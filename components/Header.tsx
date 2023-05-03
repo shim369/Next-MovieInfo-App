@@ -5,11 +5,17 @@ import Link from 'next/link';
 const Header = () => {
     const { session, signOut, signInWithGoogle } = useUser();
 
+    const logo = session ? (
+      <div className={styles.logo} onClick={(e) => e.preventDefault()}>Movie Info App</div>
+    ) : (
+      <Link href="/" className={styles.logo}>Movie Info App</Link>
+    );
+
     return (
         <header>
-            <Link href="/" className={styles.logo}>Movie Info App</Link>
+            {logo}
             {session ? (
-                 <button className={styles.authButton} onClick={() => signOut()}>サインアウト</button>
+                <button className={styles.authButton} onClick={() => signOut()}>サインアウト</button>
             ) : (
                 <button className={styles.authButton} onClick={() => signInWithGoogle()}>Googleでログイン</button>
             )}
