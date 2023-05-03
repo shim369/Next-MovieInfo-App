@@ -6,7 +6,7 @@ const Header = () => {
 
     return (
         <header>
-            <a href="./" className={styles.logo}>Movie Info App</a>
+            <a href="/" className={styles.logo}>Movie Info App</a>
             {session ? (
                 <div>
                     <button className={styles.authButton} onClick={() => signOut()}>サインアウト</button>
