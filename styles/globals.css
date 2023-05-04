@@ -72,3 +72,9 @@ iframe#youtube {
   width: 100% !important;
   height: 80vh !important;
 }
+
+@media (max-width: 800px){
+  iframe#youtube {
+    height: 50vh;
+  }
+}

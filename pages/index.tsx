@@ -16,12 +16,12 @@ interface HomeProps {
 }
 
 
-declare global {
-  interface Window {
-    onYouTubeIframeAPIReady?: () => void;
-    YT: any;
-  }
-}
+// declare global {
+//   interface Window {
+//     onYouTubeIframeAPIReady?: () => void;
+//     YT: any;
+//   }
+// }
 
 
 const Home: NextPage<HomeProps> = ({ newMovies, popularMovies }) => {
@@ -40,58 +40,58 @@ const Home: NextPage<HomeProps> = ({ newMovies, popularMovies }) => {
     setSelectedMovie(null);
   };
 
-  const player = useRef(null);
+  // const player = useRef(null);
 
-  useEffect(() => {
-    const onYouTubeIframeAPIReady = () => {
-      if (typeof window.YT !== 'undefined') {
-        player.current = new window.YT.Player('youtube', {
-          videoId: 'FoDN_onPpus',
-          playerVars: {
-            playsinline: 1,
-            autoplay: 1,
-            fs: 0,
-            rel: 0,
-            controls: 0,
-            modestbranding: 1,
-            iv_load_policy: 3,
-            start: 50,
-          },
-          events: {
-            onReady: onPlayerReady,
-            onStateChange: onPlayerStateChange,
-          },
-        });
-      }
-    };
+  // useEffect(() => {
+  //   const onYouTubeIframeAPIReady = () => {
+  //     if (typeof window.YT !== 'undefined') {
+  //       player.current = new window.YT.Player('youtube', {
+  //         videoId: 'FoDN_onPpus',
+  //         playerVars: {
+  //           playsinline: 1,
+  //           autoplay: 1,
+  //           fs: 0,
+  //           rel: 0,
+  //           controls: 0,
+  //           modestbranding: 1,
+  //           iv_load_policy: 3,
+  //           start: 50,
+  //         },
+  //         events: {
+  //           onReady: onPlayerReady,
+  //           onStateChange: onPlayerStateChange,
+  //         },
+  //       });
+  //     }
+  //   };
 
-    const onPlayerReady = (event: any) => {
-      event.target.mute();
-      event.target.playVideo();
-    };
+  //   const onPlayerReady = (event: any) => {
+  //     event.target.mute();
+  //     event.target.playVideo();
+  //   };
 
-    const onPlayerStateChange = (event: any) => {
-      if (event.data === window.YT.PlayerState.ENDED) {
-        event.target.playVideo();
-      }
-    };
+  //   const onPlayerStateChange = (event: any) => {
+  //     if (event.data === window.YT.PlayerState.ENDED) {
+  //       event.target.playVideo();
+  //     }
+  //   };
 
-    const loadYouTubeAPI = () => {
-      const tag = document.createElement('script');
-      tag.src = 'https://www.youtube.com/iframe_api';
-      const firstScriptTag = document.getElementsByTagName('script')[0];
-      if (firstScriptTag && firstScriptTag.parentNode) {
-        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-      }
-    };
+  //   const loadYouTubeAPI = () => {
+  //     const tag = document.createElement('script');
+  //     tag.src = 'https://www.youtube.com/iframe_api';
+  //     const firstScriptTag = document.getElementsByTagName('script')[0];
+  //     if (firstScriptTag && firstScriptTag.parentNode) {
+  //       firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+  //     }
+  //   };
 
-    window.onYouTubeIframeAPIReady = onYouTubeIframeAPIReady;
-    loadYouTubeAPI();
+  //   window.onYouTubeIframeAPIReady = onYouTubeIframeAPIReady;
+  //   loadYouTubeAPI();
 
-    return () => {
-      window.onYouTubeIframeAPIReady = undefined;
-    };
-  }, []);
+  //   return () => {
+  //     window.onYouTubeIframeAPIReady = undefined;
+  //   };
+  // }, []);
 
     return (
       <>
@@ -99,10 +99,10 @@ const Home: NextPage<HomeProps> = ({ newMovies, popularMovies }) => {
         <title>Movie Info App</title>
       </Head>
       <Header />
-      <div id="youtube-area">
+      {/* <div id="youtube-area">
         <div id="youtube"></div>
-      </div>
-      {/* <Carousel newMovies={newMovies} /> */}
+      </div> */}
+      <Carousel newMovies={newMovies} />
       <main className={styles.main}>
         <MovieSearch />
         <section>
