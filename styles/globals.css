@@ -67,3 +67,8 @@ footer {
   align-items: center;
   padding: 20px 0;
 }
+
+iframe#youtube {
+  width: 100% !important;
+  height: 80vh !important;
+}

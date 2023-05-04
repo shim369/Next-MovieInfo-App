@@ -1,19 +1,28 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Head from 'next/head';
 import styles from '@/styles/Home.module.css'
 import type { NextPage, GetServerSideProps } from 'next'
 import Carousel from '../components/Carousel'
 import Header from '../components/Header'
 import MovieSearch from '../components/MovieSearch'
-import { fetchMovieDetails } from '../utils/fetchMovieDetails';
-import { MovieDetails } from '../utils/types';
-import Modal from '../components/Modal';
+import { fetchMovieDetails } from '../utils/fetchMovieDetails'
+import { MovieDetails } from '../utils/types'
+import Modal from '../components/Modal'
 
 
 interface HomeProps {
   newMovies: MovieDetails[];
   popularMovies: MovieDetails[];
 }
+
+
+declare global {
+  interface Window {
+    onYouTubeIframeAPIReady?: () => void;
+    YT: any;
+  }
+}
+
 
 const Home: NextPage<HomeProps> = ({ newMovies, popularMovies }) => {
   const [selectedMovie, setSelectedMovie] = useState<MovieDetails | null>(null);
@@ -30,13 +39,70 @@ const Home: NextPage<HomeProps> = ({ newMovies, popularMovies }) => {
   const handleCloseModal = () => {
     setSelectedMovie(null);
   };
+
+  const player = useRef(null);
+
+  useEffect(() => {
+    const onYouTubeIframeAPIReady = () => {
+      if (typeof window.YT !== 'undefined') {
+        player.current = new window.YT.Player('youtube', {
+          videoId: 'FoDN_onPpus',
+          playerVars: {
+            playsinline: 1,
+            autoplay: 1,
+            fs: 0,
+            rel: 0,
+            controls: 0,
+            modestbranding: 1,
+            iv_load_policy: 3,
+            start: 50,
+          },
+          events: {
+            onReady: onPlayerReady,
+            onStateChange: onPlayerStateChange,
+          },
+        });
+      }
+    };
+
+    const onPlayerReady = (event: any) => {
+      event.target.mute();
+      event.target.playVideo();
+    };
+
+    const onPlayerStateChange = (event: any) => {
+      if (event.data === window.YT.PlayerState.ENDED) {
+        event.target.playVideo();
+      }
+    };
+
+    const loadYouTubeAPI = () => {
+      const tag = document.createElement('script');
+      tag.src = 'https://www.youtube.com/iframe_api';
+      const firstScriptTag = document.getElementsByTagName('script')[0];
+      if (firstScriptTag && firstScriptTag.parentNode) {
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+      }
+    };
+
+    window.onYouTubeIframeAPIReady = onYouTubeIframeAPIReady;
+    loadYouTubeAPI();
+
+    return () => {
+      window.onYouTubeIframeAPIReady = undefined;
+    };
+  }, []);
+
     return (
       <>
       <Head>
         <title>Movie Info App</title>
       </Head>
       <Header />
-      <Carousel newMovies={newMovies} />
+      <div id="youtube-area">
+        <div id="youtube"></div>
+      </div>
+      {/* <Carousel newMovies={newMovies} /> */}
       <main className={styles.main}>
         <MovieSearch />
         <section>
