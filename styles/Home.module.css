@@ -303,3 +303,8 @@
   min-height: 100%;
   min-width: 100%;
 }
+
+.userInfoForm {
+  display: flex;
+  flex-direction: column;
+}

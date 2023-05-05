@@ -1,6 +1,7 @@
 // import { useRouter } from 'next/router'
 import React, { useState } from 'react'
 import { addUserInfo } from "../utils/supabaseFunctions"
+import styles from '@/styles/Home.module.css'
 
 const UserInfo = () => {
     const [nickname, setNickname] = useState<string>("");
@@ -17,7 +18,7 @@ const UserInfo = () => {
   return (
     <>
         <div>UserInfo</div>
-        <form onSubmit={(e) => handleSubmit(e)}>
+        <form onSubmit={(e) => handleSubmit(e)} className={styles.userInfoForm}>
             <label htmlFor="">Nickname</label>
             <input
                 type="text"
