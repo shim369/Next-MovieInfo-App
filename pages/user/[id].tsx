@@ -3,6 +3,7 @@ import Head from 'next/head'
 import Header from '../../components/Header'
 import styles from '@/styles/Home.module.css'
 import useUser from '../../hooks/useUser';
+import UserInfo from '../../components/UserInfo';
 
 const UserProfile = () => {
   const router = useRouter();
@@ -23,6 +24,7 @@ const UserProfile = () => {
         <div>
         <p>User Id: {id}</p>
         <p>Welcome, {session.user.email || ''}!</p>
+        <UserInfo />
         </div>
       </main>
     </>
