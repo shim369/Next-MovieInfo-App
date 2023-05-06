@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "env-cmd -f .env.local.development next dev",
-    "build": "env-cmd -f .env.local.production next build",
+    "dev": "env-cmd -f .env.development next dev",
+    "build": "env-cmd -f .env.production next build",
     "start": "next start",
     "lint": "next lint"
   },
@@ -17,6 +17,7 @@
     "@types/react-dom": "18.0.11",
     "axios": "^1.4.0",
     "bcryptjs": "^2.4.3",
+    "env-cmd": "^10.1.0",
     "eslint": "8.38.0",
     "eslint-config-next": "13.3.0",
     "next": "13.3.0",
