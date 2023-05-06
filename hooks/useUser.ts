@@ -1,11 +1,11 @@
-import jwt_decode from "jwt-decode";
+// import jwt_decode from "jwt-decode";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { supabase } from "../utils/supabaseClient";
 import { Session, User } from "@supabase/supabase-js";
 
 export default function useUser() {
-  const [isTokenValid, setIsTokenValid] = useState<boolean | null>(null);
+  // const [isTokenValid, setIsTokenValid] = useState<boolean | null>(null);
 
 
   const [session, setSession] = useState<Session | null>(null);
@@ -37,13 +37,13 @@ export default function useUser() {
 
 
       // JWT の有効期限をチェックする
-      if (session) {
-        const decodedToken: { [key: string]: any } = jwt_decode(session.access_token);
-        setIsTokenValid(Date.now() < decodedToken.exp * 1000);
-      } else {
-        setIsTokenValid(null);
-      }
-      console.log("Is Token Valid:", isTokenValid);
+      // if (session) {
+      //   const decodedToken: { [key: string]: any } = jwt_decode(session.access_token);
+      //   setIsTokenValid(Date.now() < decodedToken.exp * 1000);
+      // } else {
+      //   setIsTokenValid(null);
+      // }
+      // console.log("Is Token Valid:", isTokenValid);
 
 
     });
