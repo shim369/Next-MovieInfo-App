@@ -2,8 +2,11 @@
 import React, { useState } from 'react'
 import { addUserInfo } from "../utils/supabaseFunctions"
 import styles from '@/styles/Home.module.css'
+import { useAuth } from "@/utils/supabaseClient"
 
 const UserInfo = () => {
+    const { user } = useAuth();
+    const avatarUrl = user?.user_metadata?.avatar_url;
     const [nickname, setNickname] = useState<string>("");
     const [age, setAge] = useState<string>("");
     const [country, setCountry] = useState<string>("");
@@ -12,9 +15,10 @@ const UserInfo = () => {
     const handleSubmit = async(e: any) => {
         e.preventDefault();
 
-        if (nickname === "" || age === "" || country === "") return;
-        await addUserInfo(nickname,age,country);
+        if (user.id === "" || nickname === "" || age === "" || country === "" || avatarUrl === "") return;
+        await addUserInfo(user.id, nickname, age, country, avatarUrl);
     };
+    
   return (
     <>
         <div>UserInfo</div>
