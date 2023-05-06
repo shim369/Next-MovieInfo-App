@@ -24,7 +24,7 @@ const UserProfile = () => {
         <div>
         <p>User Id: {id}</p>
         <p>Welcome, {session.user.email || ''}!</p>
-        <UserInfo />
+        <UserInfo id={id as string} avatar_url={session.user.user_metadata.avatar_url || ''} />
         </div>
       </main>
     </>

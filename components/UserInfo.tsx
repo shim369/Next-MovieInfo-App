@@ -4,7 +4,12 @@ import { addUserInfo } from "../utils/supabaseFunctions"
 import styles from '@/styles/Home.module.css'
 import { useAuth } from "@/utils/supabaseClient"
 
-const UserInfo = () => {
+interface UserInfoProps {
+    id: string;
+    avatar_url: string;
+}
+
+const UserInfo = ({ id, avatar_url }: UserInfoProps) => {
     const { user } = useAuth();
     const avatarUrl = user?.user_metadata?.avatar_url;
     const [nickname, setNickname] = useState<string>("");
@@ -16,7 +21,7 @@ const UserInfo = () => {
         e.preventDefault();
 
         if (user.id === "" || nickname === "" || age === "" || country === "" || avatarUrl === "") return;
-        await addUserInfo(user.id, nickname, age, country, avatarUrl);
+        await addUserInfo(id, nickname, age, country, avatarUrl);
     };
     
   return (
