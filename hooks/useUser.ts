@@ -8,8 +8,8 @@ export default function useUser() {
   const [user, setUser] = useState<User | null>(null);
   const router = useRouter();
   
-  const VERCEL_URL = process.env.NEXT_PUBLIC_VERCEL_URL;
-  const DEV_URL = process.env.NEXT_PUBLIC_DEV_URL;
+  const VERCEL_URL = process.env.NEXT_PUBLIC_APP_URL;
+  const DEV_URL = process.env.NEXT_PUBLIC_APP_URL;
   const currentUrl = process.env.NODE_ENV === 'development' ? DEV_URL : VERCEL_URL;
 
   useEffect(() => {
