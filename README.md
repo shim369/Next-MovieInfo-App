@@ -1,10 +1,25 @@
-This app is under construction to learn Next.js.
-As a future work policy, I'm thinking of creating an authentication function using NextAuth and Suapabase.
-Presumably Supabase uses the authentication function and DB to create a post-authentication page.
-Post-authentication content is mainly user profile registration, movie likes and scores,
-I'll add more if something like that comes up.
-I'm not making it according to a specific tutorial, so I'm going to add functions while working while googling.
-But most people around the world do the same. I feel like I'm using it as a reference.
+I recently changed from NextAuth to Supabse Auth and was able to authenticate,
+
+We were also able to link with the Supabase database.
+
+
+Originally I was making a certain amount of front only for learning Next.js,
+
+I also decided to dabble in the backend to learn.
+
+Therefore, I feel the need to design various things.
+
+A trend? I wanted to use the Vercel database.
+
+Therefore, I would like to change the authentication to Next Auth and change to use the Vercel database.
+
+Future work policy
+- Consider the specifications of the application and design the database properly.
+- Return the authentication function from Supabse Auth to Next Auth.
+- Migrate from Supabase database to Vercel KV or Vercel Postgres.
+- The UI is created roughly while doing the above, and when all the functions are completed, it is recreated as a whole.
+
+
 ---
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
