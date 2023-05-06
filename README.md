@@ -1,11 +1,4 @@
-This app is under construction to learn Next.js.
-As a future work policy, I'm thinking of creating an authentication function using NextAuth and Suapabase.
-Presumably Supabase uses the authentication function and DB to create a post-authentication page.
-Post-authentication content is mainly user profile registration, movie likes and scores,
-I'll add more if something like that comes up.
-I'm not making it according to a specific tutorial, so I'm going to add functions while working while googling.
-But most people around the world do the same. I feel like I'm using it as a reference.
----
+
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
