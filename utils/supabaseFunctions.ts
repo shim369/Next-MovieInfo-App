@@ -1,4 +1,4 @@
-import supabase from "./supabaseClient";
+import { supabase } from "./supabaseClient";
 import { PostgrestError } from "@supabase/supabase-js";
 
 export const addUserInfo = async (id: string, nickname: string, age: string, country: string, avatar_url: string) => {

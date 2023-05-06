@@ -2,7 +2,7 @@
 import React, { useState } from 'react'
 import { addUserInfo } from "../utils/supabaseFunctions"
 import styles from '@/styles/Home.module.css'
-import { useAuth } from "@/utils/supabaseClient"
+// import { useAuth } from "@/utils/supabaseClient"
 
 interface UserInfoProps {
     id: string;
@@ -10,8 +10,8 @@ interface UserInfoProps {
 }
 
 const UserInfo = ({ id, avatar_url }: UserInfoProps) => {
-    const { user } = useAuth();
-    const avatarUrl = user?.user_metadata?.avatar_url;
+    // const { user } = useAuth();
+    // const avatarUrl = user?.user_metadata?.avatar_url;
     const [nickname, setNickname] = useState<string>("");
     const [age, setAge] = useState<string>("");
     const [country, setCountry] = useState<string>("");
@@ -20,8 +20,8 @@ const UserInfo = ({ id, avatar_url }: UserInfoProps) => {
     const handleSubmit = async(e: any) => {
         e.preventDefault();
 
-        if (user.id === "" || nickname === "" || age === "" || country === "" || avatarUrl === "") return;
-        await addUserInfo(id, nickname, age, country, avatarUrl);
+        // if (user.id === "" || nickname === "" || age === "" || country === "" || avatarUrl === "") return;
+        // await addUserInfo(id, nickname, age, country, avatarUrl);
     };
     
   return (

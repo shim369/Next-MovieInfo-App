@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import supabase from "../utils/supabaseClient";
+import { supabase } from "../utils/supabaseClient";
 import { Session, User } from "@supabase/supabase-js";
 
 export default function useUser() {
