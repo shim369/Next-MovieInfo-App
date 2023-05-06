@@ -37,7 +37,7 @@ const UserInfo = () => {
                 onChange={(e)=> setCountry(e.target.value)}
                 value={country}
             />
-            <button>Submit</button>
+            <button type="submit">Submit</button>
         </form>
     </>
   )
