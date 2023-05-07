@@ -1,4 +1,11 @@
+Policies for future work
+- Determine application specifications and build the Supabase database appropriately.
+- Design the UI.
+- Complete the application.
+- Revert the authenticator from Supabase Auth to Next Auth.
+- Migrate from Supabase database to Vercel KV or Vercel Postgres.
 
+---
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
