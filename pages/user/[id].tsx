@@ -22,8 +22,8 @@ const UserProfile = () => {
       <Header />
       <main className={styles.main}>
         <div>
-        <p>User Id: {id}</p>
-        <p>Welcome, {session.user.email || ''}!</p>
+        <p className="mb-4">Welcome, {session.user.email || ''}!</p>
+        <p className="mb-4">User Id: {id}</p>
         <UserInfo id={id as string} avatar_url={session.user.user_metadata.avatar_url || ''} />
         </div>
       </main>

@@ -1,11 +1,11 @@
 import { supabase } from "./supabaseClient";
 import { PostgrestError } from "@supabase/supabase-js";
 
-export const addUserInfo = async (id: string, nickname: string, age: string, country: string, avatar_url: string) => {
+export const addUserInfo = async (id: string, nickname: string, birthDate: string, country: string, avatar_url: string) => {
     try {
         const { data, error } = await supabase
             .from('users')
-            .insert({ id: id, nickname: nickname, age: age, country: country, avatar_url: avatar_url });
+            .insert({ id: id, nickname: nickname, birthdate: birthDate, country: country, avatar_url: avatar_url });
 
         if (error) {
             throw error;
