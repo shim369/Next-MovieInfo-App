@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { addUserInfo } from "../utils/supabaseFunctions";
+import { addUserInfo, getUserInfo } from "../utils/supabaseFunctions";
 import useUser from "../hooks/useUser";
 
 interface UserInfoProps {
@@ -7,14 +7,21 @@ interface UserInfoProps {
   avatar_url: string;
 }
 
+export interface UserData {
+  nickname: string;
+  birthdate: string;
+  country: string;
+}
+
 const UserInfo = ({ id, avatar_url }: UserInfoProps) => {
   const [nickname, setNickname] = useState("");
-  const [birthDate, setBirthDate] = useState("----/--/--");
+  const [birthdate, setbirthdate] = useState("----/--/--");
   const [country, setCountry] = useState("");
   const [avatarUrl, setAvatarUrl] = useState(avatar_url || "");
   const [isUser18OrOlder, setIsUser18OrOlder] = useState(false);
   const [isFormComplete, setIsFormComplete] = useState(false);
   const [isSubmissionSuccessful, setIsSubmissionSuccessful] = useState(false);
+  const [userData, setUserData] = useState<UserData | null>(null);
 
   const { session } = useUser();
   const currentYear = new Date().getFullYear();
@@ -31,41 +38,52 @@ const UserInfo = ({ id, avatar_url }: UserInfoProps) => {
         }
       }
     }
+
+    const fetchData = async () => {
+      if (session) {
+        const data = await getUserInfo(session.user.id);
+        if (data) {
+          setUserData(data);
+        }
+      }
+    };
+
+    fetchData();
   }, [avatar_url, session]);
 
   
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      await addUserInfo(id, nickname, birthDate, country, avatarUrl);
+      await addUserInfo(id, nickname, birthdate, country, avatarUrl);
       setIsSubmissionSuccessful(true);
     } catch (error) {
       setIsSubmissionSuccessful(false);
     }
   };
 
-  const handleBirthDateChange = (e: React.ChangeEvent<HTMLSelectElement>, part: string) => {
+  const handlebirthdateChange = (e: React.ChangeEvent<HTMLSelectElement>, part: string) => {
     const value = e.target.value;
 
-    const [year, month, day] = birthDate.split("-");
-    let newBirthDate = "";
+    const [year, month, day] = birthdate.split("-");
+    let newbirthdate = "";
 
     switch (part) {
       case "year":
-        newBirthDate = `${value}-${month}-${day}`;
+        newbirthdate = `${value}-${month}-${day}`;
         break;
       case "month":
-        newBirthDate = `${year}-${value}-${day}`;
+        newbirthdate = `${year}-${value}-${day}`;
         break;
       case "day":
-        newBirthDate = `${year}-${month}-${value}`;
+        newbirthdate = `${year}-${month}-${value}`;
         break;
     }
 
-    setBirthDate(newBirthDate);
-    const birthDateObj = new Date(newBirthDate);
+    setbirthdate(newbirthdate);
+    const birthdateObj = new Date(newbirthdate);
     const currentDate = new Date();
-    const ageDifference = currentDate.getTime() - birthDateObj.getTime();
+    const ageDifference = currentDate.getTime() - birthdateObj.getTime();
     const age = new Date(ageDifference).getUTCFullYear() - 1970;
 
     if (age >= 18) {
@@ -74,7 +92,7 @@ const UserInfo = ({ id, avatar_url }: UserInfoProps) => {
       setIsUser18OrOlder(false);
     }
 
-    if (newBirthDate.includes("----") || newBirthDate.includes("--")) {
+    if (newbirthdate.includes("----") || newbirthdate.includes("--")) {
       setIsFormComplete(false);
     } else {
       setIsFormComplete(nickname !== "" && country !== "");
@@ -84,10 +102,19 @@ const UserInfo = ({ id, avatar_url }: UserInfoProps) => {
 
   return (
     <>
+    <div className="mb-4">
+      {userData && (
+        <>
+          <h3>ニックネーム: {userData?.nickname || "Not available"}</h3>
+          <h3>生年月日: {userData?.birthdate?.slice(0, 10) || "Not available"}</h3>
+          <h3>国籍: {userData?.country || "Not available"}</h3>
+        </>
+      )}
+    </div>
     <form onSubmit={(e) => handleSubmit(e)} className="space-y-4">
       <div className="flex flex-col">
         <label htmlFor="nickname" className="mb-2">
-          Nickname
+        ニックネーム
         </label>
         <input
           type="text"
@@ -100,13 +127,13 @@ const UserInfo = ({ id, avatar_url }: UserInfoProps) => {
         />
         </div>
         <div className="flex flex-col">
-          <label htmlFor="birthDate" className="mb-2">
-            Birth Date
+          <label htmlFor="birthdate" className="mb-2">
+          生年月日
           </label>
           <div className="flex space-x-2">
           <select
-            value={birthDate.slice(0, 4)}
-            onChange={(e) => handleBirthDateChange(e, "year")}
+            value={birthdate.slice(0, 4)}
+            onChange={(e) => handlebirthdateChange(e, "year")}
           >
           <option value="----">----</option>
           {Array.from({ length: currentYear - 1900 - 17 }, (_, i) => currentYear - i - 18).map((year) => (
@@ -116,8 +143,8 @@ const UserInfo = ({ id, avatar_url }: UserInfoProps) => {
           ))}
         </select>
         <select
-          value={birthDate.slice(5, 7)}
-          onChange={(e) => handleBirthDateChange(e, "month")}
+          value={birthdate.slice(5, 7)}
+          onChange={(e) => handlebirthdateChange(e, "month")}
         >
         <option value="--">--</option>
         {Array.from({ length: 12 }, (_, i) => i + 1).map((month) => (
@@ -127,8 +154,8 @@ const UserInfo = ({ id, avatar_url }: UserInfoProps) => {
         ))}
         </select>
         <select
-          value={birthDate.slice(8)}
-          onChange={(e) => handleBirthDateChange(e, "day")}
+          value={birthdate.slice(8)}
+          onChange={(e) => handlebirthdateChange(e, "day")}
         >
         <option value="--">--</option>
         {Array.from({ length: 31 }, (_, i) => i + 1).map((day) => (
@@ -141,7 +168,7 @@ const UserInfo = ({ id, avatar_url }: UserInfoProps) => {
         </div>
         <div className="flex flex-col">
           <label htmlFor="country" className="mb-2">
-            Country
+            国籍
           </label>
           <input
             type="text"
