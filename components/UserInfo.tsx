@@ -134,6 +134,7 @@ const UserInfo = ({ id, avatar_url }: UserInfoProps) => {
           <select
             value={birthdate.slice(0, 4)}
             onChange={(e) => handlebirthdateChange(e, "year")}
+            className="border border-gray-300 p-2 rounded"
           >
           <option value="----">----</option>
           {Array.from({ length: currentYear - 1900 - 17 }, (_, i) => currentYear - i - 18).map((year) => (
@@ -145,6 +146,7 @@ const UserInfo = ({ id, avatar_url }: UserInfoProps) => {
         <select
           value={birthdate.slice(5, 7)}
           onChange={(e) => handlebirthdateChange(e, "month")}
+          className="border border-gray-300 p-2 rounded"
         >
         <option value="--">--</option>
         {Array.from({ length: 12 }, (_, i) => i + 1).map((month) => (
@@ -156,6 +158,7 @@ const UserInfo = ({ id, avatar_url }: UserInfoProps) => {
         <select
           value={birthdate.slice(8)}
           onChange={(e) => handlebirthdateChange(e, "day")}
+          className="border border-gray-300 p-2 rounded"
         >
         <option value="--">--</option>
         {Array.from({ length: 31 }, (_, i) => i + 1).map((day) => (
