@@ -20,6 +20,7 @@
     "bcryptjs": "^2.4.3",
     "eslint": "8.38.0",
     "eslint-config-next": "13.3.0",
+    "i18n-iso-countries": "^7.6.0",
     "jwt-decode": "^3.1.2",
     "next": "13.3.0",
     "postcss": "^8.4.23",

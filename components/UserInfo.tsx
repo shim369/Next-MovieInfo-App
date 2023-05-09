@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { addUserInfo, getUserInfo } from "../utils/supabaseFunctions";
 import useUser from "../hooks/useUser";
+import { getNames, registerLocale } from "i18n-iso-countries";
+import ja from "i18n-iso-countries/langs/ja.json";
 
 interface UserInfoProps {
   id: string;
   avatar_url: string;
+  onNicknameUpdate: (nickname: string) => void;
 }
 
 export interface UserData {
@@ -13,7 +16,7 @@ export interface UserData {
   country: string;
 }
 
-const UserInfo = ({ id, avatar_url }: UserInfoProps) => {
+const UserInfo = ({ id, avatar_url, onNicknameUpdate }: UserInfoProps) => {
   const [nickname, setNickname] = useState("");
   const [birthdate, setbirthdate] = useState("----/--/--");
   const [country, setCountry] = useState("");
@@ -23,6 +26,9 @@ const UserInfo = ({ id, avatar_url }: UserInfoProps) => {
   const [isSubmissionSuccessful, setIsSubmissionSuccessful] = useState(false);
   const [userData, setUserData] = useState<UserData | null>(null);
 
+  registerLocale(ja);
+  const countries = getNames("ja");
+  
   const { session } = useUser();
   const currentYear = new Date().getFullYear();
 
@@ -44,6 +50,9 @@ const UserInfo = ({ id, avatar_url }: UserInfoProps) => {
         const data = await getUserInfo(session.user.id);
         if (data) {
           setUserData(data);
+          if (data.nickname) {
+            onNicknameUpdate(data.nickname);
+          }
         }
       }
     };
@@ -57,6 +66,7 @@ const UserInfo = ({ id, avatar_url }: UserInfoProps) => {
     try {
       await addUserInfo(id, nickname, birthdate, country, avatarUrl);
       setIsSubmissionSuccessful(true);
+      // onNicknameUpdate(nickname);
     } catch (error) {
       setIsSubmissionSuccessful(false);
     }
@@ -173,7 +183,22 @@ const UserInfo = ({ id, avatar_url }: UserInfoProps) => {
           <label htmlFor="country" className="mb-2">
             国籍
           </label>
-          <input
+          <select
+            value={country}
+            onChange={(e) => {
+              setCountry(e.target.value);
+              setIsFormComplete(e.target.value !== "" && nickname !== "" && isUser18OrOlder);
+            }}
+            className="border border-gray-300 p-2 rounded"
+          >
+            <option value="--">--</option>
+            {Object.entries(countries).map(([code, country]) => (
+              <option key={code} value={country}>
+                {country}
+              </option>
+            ))}
+          </select>
+          {/* <input
             type="text"
             onChange={(e) => {
               setCountry(e.target.value);
@@ -181,7 +206,7 @@ const UserInfo = ({ id, avatar_url }: UserInfoProps) => {
             }}            
             value={country}
             className="border border-gray-300 p-2 rounded"
-          />
+          /> */}
         </div>
         <button
           type="submit"
