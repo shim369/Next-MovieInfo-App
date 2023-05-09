@@ -66,7 +66,6 @@ const UserInfo = ({ id, avatar_url, onNicknameUpdate }: UserInfoProps) => {
     try {
       await addUserInfo(id, nickname, birthdate, country, avatarUrl);
       setIsSubmissionSuccessful(true);
-      // onNicknameUpdate(nickname);
     } catch (error) {
       setIsSubmissionSuccessful(false);
     }

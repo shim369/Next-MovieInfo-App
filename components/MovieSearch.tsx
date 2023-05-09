@@ -61,7 +61,7 @@ const MovieSearch: React.FC = () => {
         <div className={styles.movieLoading}>検索中...</div>
       ) : movies.length > 0 ? (
         <section>
-        <h1 className="font-inter">検索結果</h1>
+        <h1 className="font-inter mb-3">検索結果</h1>
         <div className={styles.movieList}>
           {movies.map((movie) => (
             <div key={movie.id} className={styles.movieItem}>

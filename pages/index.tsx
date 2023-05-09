@@ -106,7 +106,7 @@ const Home: NextPage<HomeProps> = ({ newMovies, popularMovies }) => {
       <main className={styles.main}>
         <MovieSearch />
         <section>
-        <h1 className="font-inter">新着映画</h1>
+        <h1 className="font-inter mb-3">新着映画</h1>
         <div className={styles.movieList}>
           {newMovies.map((movie) => (
             <div key={movie.id} className={styles.movieItem}>
@@ -126,7 +126,7 @@ const Home: NextPage<HomeProps> = ({ newMovies, popularMovies }) => {
         </div>
         </section>
         <section>
-        <h1 className="font-inter">人気映画</h1>
+        <h1 className="font-inter mb-3">人気映画</h1>
         <div className={styles.movieList}>
           {popularMovies.map((movie) => (
             <div key={movie.id} className={styles.movieItem}>
