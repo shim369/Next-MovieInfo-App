@@ -5,6 +5,7 @@ import Header from '../../components/Header'
 import styles from '@/styles/Home.module.css'
 import useUser from '../../hooks/useUser';
 import UserInfo from '../../components/UserInfo';
+import Setting from '../../components/Setting';
 import { getUserInfo } from "../../utils/supabaseFunctions";
 
 const UserProfile = () => {
@@ -33,15 +34,19 @@ const UserProfile = () => {
     return <div>Access Denied. Please log in.</div>;
   }
   
-  const handleProfileClick = () => {
-    setCurrentComponent('UserInfo');
-  };
-
   const renderComponent = () => {
     switch (currentComponent) {
       case 'UserInfo':
         return (
           <UserInfo
+            id={id as string}
+            avatar_url={session.user.user_metadata.avatar_url || ''}
+            onNicknameUpdate={setNickname}
+          />
+        );
+      case 'Setting':
+        return (
+          <Setting
             id={id as string}
             avatar_url={session.user.user_metadata.avatar_url || ''}
             onNicknameUpdate={setNickname}
@@ -73,8 +78,11 @@ const UserProfile = () => {
           <button className="bg-black text-white px-4 py-2 mx-1 rounded">
             Search
           </button>
-          <button onClick={handleProfileClick} className="bg-black text-white px-4 py-2 mx-1 rounded">
+          <button onClick={() => setCurrentComponent('UserInfo')} className="bg-black text-white px-4 py-2 mx-1 rounded">
             Profile
+          </button>
+          <button onClick={() => setCurrentComponent('Setting')} className="bg-black text-white px-4 py-2 mx-1 rounded">
+            Setting
           </button>
         </div>
       </footer>
