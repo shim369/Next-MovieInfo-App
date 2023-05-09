@@ -37,7 +37,7 @@ const UserInfo = ({ id, avatar_url, onNicknameUpdate }: UserInfoProps) => {
 
   return (
     <>
-      <div className="mb-4">
+      <div className="mb-3">
         {avatar_url ? (
           <img
             src={avatar_url}

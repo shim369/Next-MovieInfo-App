@@ -73,9 +73,6 @@ const UserProfile = () => {
       <footer className="fixed bottom-0 left-0 right-0 bg-gray-100 p-2">
         <div className="flex justify-around">
           <button className="bg-black text-white px-4 py-2 mx-1 rounded">
-            Home
-          </button>
-          <button className="bg-black text-white px-4 py-2 mx-1 rounded">
             Search
           </button>
           <button onClick={() => setCurrentComponent('UserInfo')} className="bg-black text-white px-4 py-2 mx-1 rounded">

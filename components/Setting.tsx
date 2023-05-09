@@ -111,7 +111,6 @@ const Setting = ({ id, avatar_url, onNicknameUpdate }: SettingProps) => {
     }
   };
 
-
   const handleAvatarChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!e.target.files || e.target.files.length === 0 || !session) {
         return;
