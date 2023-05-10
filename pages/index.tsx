@@ -4,7 +4,7 @@ import styles from '@/styles/Home.module.css'
 import type { NextPage, GetServerSideProps } from 'next'
 import Carousel from '../components/Carousel'
 import Header from '../components/Header'
-import MovieSearch from '../components/MovieSearch'
+// import MovieSearch from '../components/MovieSearch'
 import { fetchMovieDetails } from '../utils/fetchMovieDetails'
 import { MovieDetails } from '../utils/types'
 import Modal from '../components/Modal'
@@ -104,9 +104,9 @@ const Home: NextPage<HomeProps> = ({ newMovies, popularMovies }) => {
       </div> */}
       <Carousel newMovies={newMovies} />
       <main className={styles.main}>
-        <MovieSearch />
+        {/* <MovieSearch /> */}
         <section>
-        <h1 className="font-inter mb-3">新着映画</h1>
+        <h1 className="font-inter mb-3 text-lg">新着映画</h1>
         <div className={styles.movieList}>
           {newMovies.map((movie) => (
             <div key={movie.id} className={styles.movieItem}>
@@ -126,7 +126,7 @@ const Home: NextPage<HomeProps> = ({ newMovies, popularMovies }) => {
         </div>
         </section>
         <section>
-        <h1 className="font-inter mb-3">人気映画</h1>
+        <h1 className="font-inter mb-3 text-lg">人気映画</h1>
         <div className={styles.movieList}>
           {popularMovies.map((movie) => (
             <div key={movie.id} className={styles.movieItem}>

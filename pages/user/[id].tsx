@@ -6,12 +6,13 @@ import styles from '@/styles/Home.module.css'
 import useUser from '../../hooks/useUser';
 import UserInfo from '../../components/UserInfo';
 import Setting from '../../components/Setting';
+import MovieSearch from '../../components/MovieSearch'
 import { getUserInfo } from "../../utils/supabaseFunctions";
 
 const UserProfile = () => {
   const router = useRouter();
   const { id } = router.query;
-  const { session } = useUser();
+  const { session, isLoading } = useUser();
   const [nickname, setNickname] = useState('');
   const [currentComponent, setCurrentComponent] = useState('default');
 
@@ -30,12 +31,28 @@ const UserProfile = () => {
     fetchData();
   }, [session]);
 
+
+  useEffect(() => {
+    if (!isLoading) {
+      document.body.classList.remove("loading");
+    } else {
+      document.body.classList.add("loading");
+    }
+  }, [isLoading]);
+
   if (!session || !session.user) {
-    return <div>Access Denied. Please log in.</div>;
+    return (
+      <div className="text-center p-5">ログインしてください。</div>
+    );
   }
   
   const renderComponent = () => {
     switch (currentComponent) {
+      case 'MovieSearch':
+        return (
+          <MovieSearch
+          />
+        );
       case 'UserInfo':
         return (
           <UserInfo
@@ -70,9 +87,9 @@ const UserProfile = () => {
       <main className={styles.main}>
         {renderComponent()}
       </main>
-      <footer className="fixed bottom-0 left-0 right-0 bg-gray-100 p-2">
+      <footer className="fixed bottom-0 left-0 right-0 bg-white p-3">
         <div className="flex justify-around">
-          <button className="bg-black text-white px-4 py-2 mx-1 rounded">
+          <button onClick={() => setCurrentComponent('MovieSearch')}  className="bg-black text-white px-4 py-2 mx-1 rounded">
             Search
           </button>
           <button onClick={() => setCurrentComponent('UserInfo')} className="bg-black text-white px-4 py-2 mx-1 rounded">
