@@ -126,7 +126,7 @@ const Setting = ({ id, avatar_url, onNicknameUpdate }: SettingProps) => {
       <div className="mb-4">
         {avatarUrl ? (
           <img
-            src={`${avatarUrl}?t=${Date.now()}`}
+            src={`${avatarUrl}`}
             alt="User avatar"
             className="rounded-full w-32 h-32 object-cover mx-auto"
           />

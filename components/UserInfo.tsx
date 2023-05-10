@@ -17,6 +17,8 @@ export interface UserData {
 
 const UserInfo = ({ id, avatar_url, onNicknameUpdate }: UserInfoProps) => {
   const [userData, setUserData] = useState<UserData | null>(null);
+  const [avatarUrl, setAvatarUrl] = useState<string | null>(null);
+
 
   const { session } = useUser();
 
@@ -26,6 +28,7 @@ const UserInfo = ({ id, avatar_url, onNicknameUpdate }: UserInfoProps) => {
         const data = await getUserInfo(session.user.id);
         if (data) {
           setUserData(data);
+          setAvatarUrl(data.avatar_url);
           if (data.nickname) {
             onNicknameUpdate(data.nickname);
           }
@@ -39,9 +42,9 @@ const UserInfo = ({ id, avatar_url, onNicknameUpdate }: UserInfoProps) => {
   return (
     <>
       <div className="mb-3">
-        {avatar_url ? (
+        {userData?.avatar_url ? (
           <img
-            src={`${avatar_url}?t=${Date.now()}`}
+            src={`${avatarUrl}`}
             alt="User avatar"
             className="rounded-full w-32 h-32 object-cover mx-auto mb-2"
           />

@@ -25,9 +25,6 @@ export const getUserInfo = async (userId: string): Promise<UserData | null> => {
   
     return null;
 };
-  
-  
-
 
 export const addUserInfo = async (id: string, nickname: string, birthdate: string, country: string, avatar_url: string) => {
     try {
@@ -45,26 +42,43 @@ export const addUserInfo = async (id: string, nickname: string, birthdate: strin
 };
 
 export const updateAvatar = async (userId: string, file: File): Promise<string | null> => {
-    const uniqueFileName = `${new Date().toISOString()}-${file.name}`;
-  
-    const { data, error } = await supabase.storage
-      .from("avatars")
-      .upload(`${userId}/${uniqueFileName}`, file);
-  
-    if (error) {
-      console.error("Error uploading avatar:", error.message);
-      return null;
-    }
-  
-    const avatarUrl = supabase.storage.from("avatars").getPublicUrl(`${userId}/${file.name}`).data.publicUrl;
+  const uniqueFileName = `${new Date().toISOString()}-${file.name}`;
 
-    await supabase
-      .from("users")
-      .update({ avatar_url: avatarUrl })
-      .eq("id", userId);
+  const { error } = await supabase.storage
+    .from("avatars")
+    .upload(`${userId}/${uniqueFileName}`, file);
 
-    return avatarUrl;
-};   
+  if (error) {
+    console.error("Error uploading avatar:", error.message);
+    return null;
+  }
+
+  // Get the signed URL for the uploaded file
+  const { data: signedUrlData, error: signedUrlError } = await supabase.storage
+    .from("avatars")
+    .createSignedUrl(`${userId}/${uniqueFileName}`, 3600);
+
+  if (signedUrlError || !signedUrlData) {
+    console.error("Error getting signed URL:", signedUrlError?.message);
+    return null;
+  }
+
+  const signedUrl = signedUrlData.signedUrl;
+
+  const { error: updateError } = await supabase
+    .from("users")
+    .update({ avatar_url: signedUrl })
+    .eq("id", userId);
+
+  if (updateError) {
+    console.error("Error updating avatar URL in users table:", updateError.message);
+    return null;
+  }
+
+  return signedUrl;
+};
+
+
 
 export const updateUserInfo = async (id: string, nickname: string, birthdate: string, country: string, avatar_url: string) => {
     try {
