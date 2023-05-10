@@ -15,15 +15,17 @@ export const getUserInfo = async (userId: string): Promise<UserData | null> => {
     }
   
     if (data) {
-        return {
-          nickname: data.nickname,
-          birthdate: data.birthdate,
-          country: data.country
-        } as UserData;
+      return {
+        nickname: data.nickname,
+        birthdate: data.birthdate,
+        country: data.country,
+        avatar_url: data.avatar_url,
+      } as UserData;
     }
   
     return null;
 };
+  
   
 
 
@@ -43,24 +45,32 @@ export const addUserInfo = async (id: string, nickname: string, birthdate: strin
 };
 
 export const updateAvatar = async (userId: string, file: File): Promise<string | null> => {
+    const uniqueFileName = `${new Date().toISOString()}-${file.name}`;
+  
     const { data, error } = await supabase.storage
       .from("avatars")
-      .upload(`${userId}/${file.name}`, file);
+      .upload(`${userId}/${uniqueFileName}`, file);
   
     if (error) {
       console.error("Error uploading avatar:", error.message);
       return null;
     }
   
-    const avatarUrl = supabase.storage.from("avatars").getPublicUrl(`${userId}/${file.name}`).data.publicUrl;
+    const publicUrl = `https://${process.env.NEXT_PUBLIC_SUPABASE_STORAGE_ENDPOINT}/storage/v1/object/public/avatars/${userId}/${uniqueFileName}`;
   
-    await supabase
+    const { error: updateError } = await supabase
       .from("users")
-      .update({ avatar_url: avatarUrl })
+      .update({ avatar_url: publicUrl })
       .eq("id", userId);
   
-    return avatarUrl;
-};
+    if (updateError) {
+    console.error("Error updating user info with new avatar:", updateError.message);
+    return null;
+    }
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+  
+    return publicUrl;
+};   
 
 export const updateUserInfo = async (id: string, nickname: string, birthdate: string, country: string, avatar_url: string) => {
     try {

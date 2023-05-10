@@ -53,7 +53,6 @@ export default function useUser() {
 
     
     const handleRouteChangeComplete = () => {
-      console.log("Route change complete");
       setIsLoading(false);
     };
 

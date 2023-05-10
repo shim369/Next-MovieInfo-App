@@ -12,6 +12,7 @@ export interface UserData {
   nickname: string;
   birthdate: string;
   country: string;
+  avatar_url: string;
 }
 
 const UserInfo = ({ id, avatar_url, onNicknameUpdate }: UserInfoProps) => {
@@ -40,7 +41,7 @@ const UserInfo = ({ id, avatar_url, onNicknameUpdate }: UserInfoProps) => {
       <div className="mb-3">
         {avatar_url ? (
           <img
-            src={avatar_url}
+            src={`${avatar_url}?t=${Date.now()}`}
             alt="User avatar"
             className="rounded-full w-32 h-32 object-cover mx-auto mb-2"
           />

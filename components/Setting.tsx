@@ -14,6 +14,7 @@ export interface UserData {
   nickname: string;
   birthdate: string;
   country: string;
+  avatar_url: string;
 }
 
 const Setting = ({ id, avatar_url, onNicknameUpdate }: SettingProps) => {
@@ -32,18 +33,9 @@ const Setting = ({ id, avatar_url, onNicknameUpdate }: SettingProps) => {
   const currentYear = new Date().getFullYear();
 
   useEffect(() => {
-    if (session) {
-      const googleProvider = session.user?.app_metadata?.providers?.find(
-        (provider: any) => provider === "google"
-      );
-      if (googleProvider) {
-        const googleUserInfo = session.user?.user_metadata?.[googleProvider];
-        if (googleUserInfo) {
-          setAvatarUrl(googleUserInfo.avatar_url || avatar_url || "");
-        }
-      }
-    }
-  }, [avatar_url, session]);
+    setAvatarUrl(avatar_url || "");
+  }, [avatar_url]);
+
 
   useEffect(() => {
     const fetchUserInfo = async () => {
@@ -134,7 +126,7 @@ const Setting = ({ id, avatar_url, onNicknameUpdate }: SettingProps) => {
       <div className="mb-4">
         {avatarUrl ? (
           <img
-            src={avatarUrl}
+            src={`${avatarUrl}?t=${Date.now()}`}
             alt="User avatar"
             className="rounded-full w-32 h-32 object-cover mx-auto"
           />
@@ -242,4 +234,4 @@ const Setting = ({ id, avatar_url, onNicknameUpdate }: SettingProps) => {
   )
 }
 
-export default Setting
+export default Setting;
