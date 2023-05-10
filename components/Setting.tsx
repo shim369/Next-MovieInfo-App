@@ -22,7 +22,7 @@ const Setting = ({ id, avatar_url, onNicknameUpdate }: SettingProps) => {
   const [country, setCountry] = useState("");
   const [avatarUrl, setAvatarUrl] = useState(avatar_url || "");
   const [isUser18OrOlder, setIsUser18OrOlder] = useState(false);
-  const [isFormComplete, setIsFormComplete] = useState(false);
+  // const [isFormComplete, setIsFormComplete] = useState(false);
   const [isSubmissionSuccessful, setIsSubmissionSuccessful] = useState(false);
 
   registerLocale(ja);
@@ -104,11 +104,11 @@ const Setting = ({ id, avatar_url, onNicknameUpdate }: SettingProps) => {
       setIsUser18OrOlder(false);
     }
 
-    if (newbirthdate.includes("----") || newbirthdate.includes("--")) {
-      setIsFormComplete(false);
-    } else {
-      setIsFormComplete(nickname !== "" && country !== "");
-    }
+    // if (newbirthdate.includes("----") || newbirthdate.includes("--")) {
+    //   setIsFormComplete(false);
+    // } else {
+    //   setIsFormComplete(nickname !== "" && country !== "");
+    // }
   };
 
   const handleAvatarChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -158,7 +158,7 @@ const Setting = ({ id, avatar_url, onNicknameUpdate }: SettingProps) => {
           type="text"
           onChange={(e) => {
             setNickname(e.target.value);
-            setIsFormComplete(e.target.value !== "" && country !== "" && isUser18OrOlder);
+            // setIsFormComplete(e.target.value !== "" && country !== "" && isUser18OrOlder);
           }}
           value={nickname}
           className="border border-gray-300 p-2 rounded"
@@ -215,7 +215,7 @@ const Setting = ({ id, avatar_url, onNicknameUpdate }: SettingProps) => {
             value={country}
             onChange={(e) => {
               setCountry(e.target.value);
-              setIsFormComplete(e.target.value !== "" && nickname !== "" && isUser18OrOlder);
+              // setIsFormComplete(e.target.value !== "" && nickname !== "" && isUser18OrOlder);
             }}
             className="border border-gray-300 p-2 rounded"
           >
@@ -229,7 +229,7 @@ const Setting = ({ id, avatar_url, onNicknameUpdate }: SettingProps) => {
         </div>
         <button
           type="submit"
-          disabled={!isFormComplete}
+          // disabled={!isFormComplete}
           className="bg-blue-500 text-white px-4 py-2 rounded disabled:bg-gray-500 disabled:cursor-not-allowed"
         >
           Submit
