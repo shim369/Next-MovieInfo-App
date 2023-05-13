@@ -219,11 +219,11 @@ const Setting = ({ id, avatar_url, onNicknameUpdate }: SettingProps) => {
               setCountry(e.target.value);
               // setIsFormComplete(e.target.value !== "" && nickname !== "" && isUser18OrOlder);
             }}
-            className="border border-gray-300 p-2 rounded"
+            className="w-full border border-gray-300 p-2 rounded"
           >
             <option value="--">--</option>
             {Object.entries(countries).map(([code, country]) => (
-              <option key={code} value={country}>
+              <option className="truncate max-w-[200px]" key={code} value={country}>
                 {country}
               </option>
             ))}
