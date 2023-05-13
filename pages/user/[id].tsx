@@ -71,9 +71,7 @@ const UserProfile = () => {
         );
       default:
         return (
-          <div>
-            <p className="mb-4">ようこそ, {nickname}!</p>
-          </div>
+            <p>ようこそ, {nickname}!</p>
         );
     }
   };
@@ -84,7 +82,7 @@ const UserProfile = () => {
       <title>After Auth</title>
       </Head>
       <Header />
-      <main className={styles.main}>
+      <main className={styles.mainId}>
         {renderComponent()}
       </main>
       <footer className="fixed bottom-0 left-0 right-0 bg-white p-3">
