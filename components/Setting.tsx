@@ -145,12 +145,18 @@ const Setting = ({ id, avatar_url, onNicknameUpdate }: SettingProps) => {
             <span className="text-gray-400">No Avatar</span>
           </div>
         )}
-        <input
+        {/* <input
           type="file"
           accept="image/*"
           onChange={handleAvatarChange}
           className="mt-4"
-        />
+        /> */}
+        <div className="file-input-wrapper mt-4">
+          <label htmlFor="file-upload" className="file-label">
+            画像を選択
+          </label>
+          <input type="file" accept="image/*" onChange={handleAvatarChange} id="file-upload" className="file-input" />
+        </div>
       </div>
       <div className="flex flex-col">
         <label htmlFor="nickname" className="mb-2">
@@ -234,7 +240,7 @@ const Setting = ({ id, avatar_url, onNicknameUpdate }: SettingProps) => {
           // disabled={!isFormComplete}
           className="bg-blue-500 text-white px-4 py-2 rounded disabled:bg-gray-500 disabled:cursor-not-allowed"
         >
-          Submit
+          設定する
         </button>
         {isSubmissionSuccessful && (
           <div className="text-green-500 mt-4">User info submitted successfully!</div>
