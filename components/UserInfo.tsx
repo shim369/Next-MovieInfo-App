@@ -46,7 +46,7 @@ const UserInfo = ({ id, avatar_url, onNicknameUpdate }: UserInfoProps) => {
           <img
             src={`${avatarUrl}`}
             alt="User avatar"
-            className="rounded-full w-32 h-32 object-cover mx-auto mb-2"
+            className="rounded-full w-32 h-32 bg-gray-200 object-cover mx-auto mb-2"
           />
         ) : (
           <div className="rounded-full w-32 h-32 bg-gray-200 mx-auto flex items-center justify-center">

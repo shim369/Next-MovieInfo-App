@@ -49,6 +49,16 @@ const Setting = ({ id, avatar_url, onNicknameUpdate }: SettingProps) => {
     fetchUserInfo();
   }, [id]);
 
+  useEffect(() => {
+    const fetchAvatarUrl = async () => {
+      const userData = await getUserInfo(id);
+      if (userData && userData.avatar_url) {
+        setAvatarUrl(userData.avatar_url);
+      }
+    };
+    fetchAvatarUrl();
+  }, [id]);
+
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
