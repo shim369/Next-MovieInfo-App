@@ -56,7 +56,7 @@ export const updateAvatar = async (userId: string, file: File): Promise<string |
   // Get the signed URL for the uploaded file
   const { data: signedUrlData, error: signedUrlError } = await supabase.storage
     .from("avatars")
-    .createSignedUrl(`${userId}/${uniqueFileName}`, 3600);
+    .createSignedUrl(`${userId}/${uniqueFileName}`, 604800);
 
   if (signedUrlError || !signedUrlData) {
     console.error("Error getting signed URL:", signedUrlError?.message);
