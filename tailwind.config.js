@@ -2,7 +2,11 @@
 export default {
   content: ['./pages/**/*.{js,ts,jsx,tsx}', './components/**/*.{js,ts,jsx,tsx}'],
   theme: {
-    extend: {},
+    extend: {
+      backgroundColor: {
+        'blue-500': '#02b0f9',
+      },
+    },
   },
   variants: {
     extend: {},

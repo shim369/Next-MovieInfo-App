@@ -87,14 +87,14 @@ const UserProfile = () => {
       </main>
       <footer className="fixed bottom-0 left-0 right-0 bg-white p-3">
         <div className="flex justify-around">
-          <button onClick={() => setCurrentComponent('MovieSearch')}  className="bg-black text-white px-4 py-2 mx-1 rounded">
-            Search
+          <button onClick={() => setCurrentComponent('MovieSearch')}  className="bg-blue-500 text-white px-4 py-2 mx-1 rounded flex items-center justify-center">
+          <i className="material-icons">search</i>
           </button>
-          <button onClick={() => setCurrentComponent('UserInfo')} className="bg-black text-white px-4 py-2 mx-1 rounded">
-            Profile
+          <button onClick={() => setCurrentComponent('UserInfo')} className="bg-blue-500 text-white px-4 py-2 mx-1 rounded flex items-center justify-center">
+          <i className="material-icons">person</i>
           </button>
-          <button onClick={() => setCurrentComponent('Setting')} className="bg-black text-white px-4 py-2 mx-1 rounded">
-            Setting
+          <button onClick={() => setCurrentComponent('Setting')} className="bg-blue-500 text-white px-4 py-2 mx-1 rounded flex items-center justify-center">
+          <i className="material-icons">settings</i>
           </button>
         </div>
       </footer>

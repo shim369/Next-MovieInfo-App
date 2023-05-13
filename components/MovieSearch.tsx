@@ -48,14 +48,14 @@ const MovieSearch: React.FC = () => {
           placeholder="映画情報を検索する"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
-          className={styles.searchInput}
+          className={`${styles.searchInput} border border-gray-300`}
           onKeyDown={(e) => {
             if (e.key === 'Enter') {
               searchMovies();
             }
           }}
         />
-        <button onClick={searchMovies} className={styles.searchButton}>検索</button>
+        <button onClick={searchMovies} className={styles.searchButton}><i className="material-icons">search</i></button>
       </div>
       {loading ? (
         <div className={styles.movieLoading}>検索中...</div>

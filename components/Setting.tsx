@@ -145,12 +145,6 @@ const Setting = ({ id, avatar_url, onNicknameUpdate }: SettingProps) => {
             <span className="text-gray-400">No Avatar</span>
           </div>
         )}
-        {/* <input
-          type="file"
-          accept="image/*"
-          onChange={handleAvatarChange}
-          className="mt-4"
-        /> */}
         <div className="file-input-wrapper mt-4">
           <label htmlFor="file-upload" className="file-label">
             画像を選択

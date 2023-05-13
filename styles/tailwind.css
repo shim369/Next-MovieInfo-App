@@ -7,11 +7,11 @@
 }
 
 .file-input {
-    @apply absolute opacity-0 w-full h-full top-0 left-0 cursor-pointer;
+    @apply absolute opacity-0 w-full h-full top-0 left-0;
 }
 
 .file-label {
-    @apply inline-block px-4 py-2 text-white bg-green-500 rounded cursor-pointer;
-    @apply hover:bg-green-600 active:bg-green-700;
+    @apply inline-block px-4 py-2 text-white bg-gray-500 rounded;
+    @apply hover:cursor-pointer bg-gray-600 active:bg-gray-700;
     @apply transition-all duration-200;
 }  
