@@ -1,12 +1,21 @@
 import React, { useState } from 'react';
 import styles from '@/styles/Home.module.css';
-// import { formatDate } from '@/utils/dateUtils';
 import { fetchMovies } from '../utils/fetchMovies';
 import { fetchMovieDetails } from '../utils/fetchMovieDetails';
 import { Movie, MovieDetails } from '../utils/types';
+import { likeMovie } from "../utils/supabaseFunctions";
 import Modal from './Modal';
+import useUser from "../hooks/useUser";
 
-const MovieSearch: React.FC = () => {
+export default function MovieSearch() {
+  const { user } = useUser();
+  const handleLike = async (movie: Movie) => {
+    if (user) {
+      await likeMovie(movie, user.id);
+    } else {
+      console.error("User not found");
+    }
+  };
   const [searchTerm, setSearchTerm] = useState('');
   const [loading, setLoading] = useState(false);
   const [movies, setMovies] = useState<Movie[]>([]);
@@ -40,6 +49,10 @@ const MovieSearch: React.FC = () => {
     setSelectedMovie(null);
   };
 
+  const uniqueMovies = movies.filter((movie, index, self) =>
+    index === self.findIndex((m) => m.id === movie.id)
+  );
+
   return (
     <>
       <div className={styles.searchBox}>
@@ -59,28 +72,33 @@ const MovieSearch: React.FC = () => {
       </div>
       {loading ? (
         <div className={styles.movieLoading}>検索中...</div>
-      ) : movies.length > 0 ? (
+      ) : uniqueMovies.length > 0 ? (
         <section>
-        <h1 className="font-inter mb-3 text-lg">検索結果</h1>
+        <h2 className="text-lg"><span>検索結果</span></h2>
         <div className={styles.movieList}>
-          {movies.map((movie) => (
-            <div key={movie.id} className={styles.movieItem}>
-              <img
-                src={
-                  movie.poster_path && movie.poster_path !== 'null' && movie.poster_path.trim() !== ''
-                    ? `https://image.tmdb.org/t/p/w400${movie.poster_path}`
-                    : "/no-image.jpg"
-                }
-                alt={movie.title}
-                onClick={() => handleMovieClick(movie.id)}
-                width="324"
-                height="486"
-              />
-              {/* <h2>{movie.title}</h2>
-              <p>{formatDate(movie.release_date)}</p>
-              <button onClick={() => handleMovieClick(movie.id)}>詳細情報</button> */}
-            </div>
-          ))}
+          {uniqueMovies.map((movie) => (
+          <div key={movie.id} className={`${styles.movieItem} relative`}>
+            <img
+              src={
+                movie.poster_path && movie.poster_path !== 'null' && movie.poster_path.trim() !== ''
+                  ? `https://image.tmdb.org/t/p/w400${movie.poster_path}`
+                  : "/no-image.jpg"
+              }
+              alt={movie.title}
+              onClick={() => handleMovieClick(movie.id)}
+              width="324"
+              height="486"
+            />
+            <button
+              onClick={() => handleLike(movie)}
+              className={`${styles.movieItemButton} flex items-center justify-center w-6 h-6 absolute top-0 right-0 ${
+                movie.liked ? 'liked' : ''
+              }`}
+            >
+              <i className="material-icons p-2 text-sm">favorite</i>
+            </button>
+          </div>
+        ))}
         </div>
         </section>
       ) : (
@@ -92,5 +110,3 @@ const MovieSearch: React.FC = () => {
     </>
   );
 };
-
-export default MovieSearch;

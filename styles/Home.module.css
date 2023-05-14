@@ -169,19 +169,18 @@
   min-height: 50px;
 }
 
-.movieItem button {
-  margin-top: 10px;
-  padding: 8px;
+.movieItemButton {
   border: none;
-  background: #02b0f9;
-  color: #fff;
-  font-weight: bold;
+  background: #fff;
+  color: #d5d3d3;
   appearance: none;
   -webkit-appearance: none;
   -moz-appearance: none;
   cursor: pointer;
-  border: 2px solid transparent;
-  border-radius: 0.25rem;
+}
+
+.liked {
+  color: red;
 }
 
 .movieLoading {
@@ -253,8 +252,9 @@
   }
 }
 
-.modalText h2 {
+.modalText h3 {
   margin-bottom: 20px;
+  font-size: 1.2em;
 }
 
 .modalOverview {

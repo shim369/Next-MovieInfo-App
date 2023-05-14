@@ -12,6 +12,7 @@ export interface Movie {
     backdrop_path: string;
     genre_ids: number[];
     homepage?: string;
+    liked: boolean;
   }
   
   export interface Cast {

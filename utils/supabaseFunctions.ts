@@ -1,6 +1,7 @@
 import { supabase } from "./supabaseClient";
 import { PostgrestError } from "@supabase/supabase-js";
 import { UserData } from "../components/UserInfo";
+import { Movie } from '../utils/types';
 
 export const getUserInfo = async (userId: string): Promise<UserData | null> => {
     const { data, error } = await supabase
@@ -78,8 +79,6 @@ export const updateAvatar = async (userId: string, file: File): Promise<string |
   return signedUrl;
 };
 
-
-
 export const updateUserInfo = async (id: string, nickname: string, birthdate: string, country: string, avatar_url: string) => {
     try {
         const { data, error } = await supabase
@@ -95,3 +94,34 @@ export const updateUserInfo = async (id: string, nickname: string, birthdate: st
         console.error('Error while updating user info:', (error as PostgrestError).message);
     }
 };
+
+export async function likeMovie(movie: Movie, userId: string) {
+  let { data: existingMovies } = await supabase
+    .from("movies")
+    .select("id")
+    .eq("id", movie.id);
+
+  if (!existingMovies || existingMovies.length === 0) {
+    await supabase.from("movies").insert([
+      {
+        id: movie.id,
+        title: movie.title,
+        poster_path: movie.poster_path,
+        overview: movie.overview,
+        release_date: movie.release_date,
+      },
+    ]);
+    movie.liked = true;
+  }
+
+  await supabase.from("likes").insert([
+    {
+      user_id: userId,
+      movie_id: movie.id,
+      created_at: new Date(),
+    },
+  ]);
+
+  movie.liked = true;
+}
+

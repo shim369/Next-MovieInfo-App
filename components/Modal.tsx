@@ -54,7 +54,7 @@ const Modal: React.FC<ModalProps> = ({ movie, onClose }) => {
             />
           )}
           <div className={styles.modalText}>
-            <h2>{movie.title}</h2>
+            <h3>{movie.title}</h3>
             <p className={styles.modalOverview}>{movie.overview}</p>
             <p className={styles.cast}>キャスト:&nbsp;
             {movie.credits.cast.slice(0, 10).map((castMember: Cast) => 
