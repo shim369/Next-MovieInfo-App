@@ -95,33 +95,41 @@ export const updateUserInfo = async (id: string, nickname: string, birthdate: st
     }
 };
 
-export async function likeMovie(movie: Movie, userId: string) {
-  let { data: existingMovies } = await supabase
-    .from("movies")
-    .select("id")
-    .eq("id", movie.id);
+export const likeMovie = async (movie: Movie, userId: string) => {
+  const { data, error } = await supabase
+    .from('likes')
+    .insert([{ user_id: userId, movie_id: movie.id }]);
 
-  if (!existingMovies || existingMovies.length === 0) {
-    await supabase.from("movies").insert([
-      {
-        id: movie.id,
-        title: movie.title,
-        poster_path: movie.poster_path,
-        overview: movie.overview,
-        release_date: movie.release_date,
-      },
-    ]);
-    movie.liked = true;
+  if (error) {
+    console.error('Error liking movie', error);
   }
 
-  await supabase.from("likes").insert([
-    {
-      user_id: userId,
-      movie_id: movie.id,
-      created_at: new Date(),
-    },
-  ]);
+  return data;
+};
 
-  movie.liked = true;
-}
+export const unlikeMovie = async (movie: Movie, userId: string) => {
+  const { data, error } = await supabase
+    .from('likes')
+    .delete()
+    .match({ user_id: userId, movie_id: movie.id });
 
+  if (error) {
+    console.error('Error unliking movie', error);
+  }
+
+  return data;
+};
+
+export const fetchLikedMovieIds = async (userId: string) => {
+  const { data, error } = await supabase
+    .from('likes')
+    .select('movie_id')
+    .match({ user_id: userId });
+
+  if (error) {
+    console.error('Error fetching liked movies', error);
+    return [];
+  }
+
+  return data.map(record => record.movie_id);
+};

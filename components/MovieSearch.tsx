@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from '@/styles/Home.module.css';
 import { fetchMovies } from '../utils/fetchMovies';
 import { fetchMovieDetails } from '../utils/fetchMovieDetails';
 import { Movie, MovieDetails } from '../utils/types';
-import { likeMovie } from "../utils/supabaseFunctions";
+import { likeMovie, fetchLikedMovieIds } from "../utils/supabaseFunctions";
 import Modal from './Modal';
 import useUser from "../hooks/useUser";
 
@@ -21,6 +21,18 @@ export default function MovieSearch() {
   const [movies, setMovies] = useState<Movie[]>([]);
   const [selectedMovie, setSelectedMovie] = useState<MovieDetails | null>(null);
   const [hasSearched, setHasSearched] = useState(false);
+  const [likedMovieIds, setLikedMovieIds] = useState<number[]>([]);
+
+  const fetchLikedMovies = async () => {
+    if (user) {
+      const likedIds = await fetchLikedMovieIds(user.id);
+      setLikedMovieIds(likedIds);
+    }
+  };
+
+  useEffect(() => {
+    fetchLikedMovies();
+  }, [user]);
 
   const searchMovies = async () => {
     setLoading(true);
@@ -49,9 +61,10 @@ export default function MovieSearch() {
     setSelectedMovie(null);
   };
 
-  const uniqueMovies = movies.filter((movie, index, self) =>
-    index === self.findIndex((m) => m.id === movie.id)
-  );
+  const uniqueMovies = movies.map((movie) => ({
+    ...movie,
+    liked: likedMovieIds.includes(movie.id),
+  }));
 
   return (
     <>
@@ -92,7 +105,7 @@ export default function MovieSearch() {
             <button
               onClick={() => handleLike(movie)}
               className={`${styles.movieItemButton} flex items-center justify-center w-6 h-6 absolute top-0 right-0 ${
-                movie.liked ? 'liked' : ''
+                movie.liked ? 'text-red-500' : 'text-gray-200'
               }`}
             >
               <i className="material-icons p-2 text-sm">favorite</i>

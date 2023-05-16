@@ -172,15 +172,11 @@
 .movieItemButton {
   border: none;
   background: #fff;
-  color: #d5d3d3;
+  /* color: #d5d3d3; */
   appearance: none;
   -webkit-appearance: none;
   -moz-appearance: none;
   cursor: pointer;
-}
-
-.liked {
-  color: red;
 }
 
 .movieLoading {
