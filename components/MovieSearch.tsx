@@ -3,19 +3,30 @@ import styles from '@/styles/Home.module.css';
 import { fetchMovies } from '../utils/fetchMovies';
 import { fetchMovieDetails } from '../utils/fetchMovieDetails';
 import { Movie, MovieDetails } from '../utils/types';
-import { likeMovie, fetchLikedMovieIds } from "../utils/supabaseFunctions";
+import { likeMovie, unlikeMovie, fetchLikedMovieIds } from "../utils/supabaseFunctions";
 import Modal from './Modal';
 import useUser from "../hooks/useUser";
 
 export default function MovieSearch() {
   const { user } = useUser();
+  const isMovieLiked = (movieId: number) => {
+    return likedMovieIds.includes(movieId);
+  };
   const handleLike = async (movie: Movie) => {
     if (user) {
-      await likeMovie(movie, user.id);
+      if (isMovieLiked(movie.id)) {
+        // if movie is already liked, unlike it
+        await unlikeMovie(movie, user.id);
+        setLikedMovieIds(likedMovieIds.filter(id => id !== movie.id));
+      } else {
+        // if movie is not liked yet, like it
+        await likeMovie(movie, user.id);
+        setLikedMovieIds([...likedMovieIds, movie.id]);
+      }
     } else {
       console.error("User not found");
     }
-  };
+  };  
   const [searchTerm, setSearchTerm] = useState('');
   const [loading, setLoading] = useState(false);
   const [movies, setMovies] = useState<Movie[]>([]);
@@ -105,7 +116,7 @@ export default function MovieSearch() {
             <button
               onClick={() => handleLike(movie)}
               className={`${styles.movieItemButton} flex items-center justify-center w-6 h-6 absolute top-0 right-0 ${
-                movie.liked ? 'text-red-500' : 'text-gray-200'
+                isMovieLiked(movie.id) ? 'text-red-500' : 'text-gray-200'
               }`}
             >
               <i className="material-icons p-2 text-sm">favorite</i>

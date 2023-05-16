@@ -96,15 +96,24 @@ export const updateUserInfo = async (id: string, nickname: string, birthdate: st
 };
 
 export const likeMovie = async (movie: Movie, userId: string) => {
-  const { data, error } = await supabase
-    .from('likes')
-    .insert([{ user_id: userId, movie_id: movie.id }]);
-
-  if (error) {
-    console.error('Error liking movie', error);
+  try {
+    const exists = await checkMovieExistence(movie.id);
+    if (!exists) {
+      await addMovieToDB(movie);
+    }
+    
+    const { data, error } = await supabase
+      .from('likes')
+      .insert([{ user_id: userId, movie_id: movie.id }]);
+  
+    if (error) {
+      console.error('Error liking movie', error);
+    }
+  
+    return data;
+  } catch (error) {
+    console.error('Error in likeMovie function', error);
   }
-
-  return data;
 };
 
 export const unlikeMovie = async (movie: Movie, userId: string) => {
@@ -132,4 +141,36 @@ export const fetchLikedMovieIds = async (userId: string) => {
   }
 
   return data.map(record => record.movie_id);
+};
+
+export const addMovieToDB = async (movie: Movie) => {
+  const { data, error } = await supabase
+    .from('movies')
+    .insert([
+      { 
+        id: movie.id,
+        title: movie.title,
+        poster_path: movie.poster_path,
+        overview: movie.overview,
+        release_date: movie.release_date
+      }
+    ]);
+
+  if (error) {
+    console.error('Error adding movie to DB', error);
+  }
+};
+
+export const checkMovieExistence = async (movieId: number) => {
+  const { data, error } = await supabase
+    .from('movies')
+    .select('id')
+    .eq('id', movieId);
+
+  if (error) {
+    console.error('Error checking movie existence', error);
+    return false;
+  }
+
+  return data.length > 0;
 };
