@@ -54,7 +54,6 @@ export const updateAvatar = async (userId: string, file: File): Promise<string |
     return null;
   }
 
-  // Get the signed URL for the uploaded file
   const { data: signedUrlData, error: signedUrlError } = await supabase.storage
     .from("avatars")
     .createSignedUrl(`${userId}/${uniqueFileName}`, 604800);
@@ -173,4 +172,24 @@ export const checkMovieExistence = async (movieId: number) => {
   }
 
   return data.length > 0;
+};
+
+export const fetchLikedMovies = async (userId: string): Promise<Movie[]> => {
+  const movieIds = await fetchLikedMovieIds(userId);
+
+  const movies = await Promise.all(movieIds.map(async (movieId) => {
+    const { data, error } = await supabase
+      .from('movies')
+      .select('*')
+      .eq('id', movieId)
+      .single();
+
+    if (error) {
+      console.error('Error fetching movie:', error.message);
+      return null;
+    }
+    return data as Movie;
+  }));
+
+  return movies.filter(movie => movie !== null) as Movie[];
 };

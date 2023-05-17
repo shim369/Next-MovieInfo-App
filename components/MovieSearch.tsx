@@ -15,11 +15,9 @@ export default function MovieSearch() {
   const handleLike = async (movie: Movie) => {
     if (user) {
       if (isMovieLiked(movie.id)) {
-        // if movie is already liked, unlike it
         await unlikeMovie(movie, user.id);
         setLikedMovieIds(likedMovieIds.filter(id => id !== movie.id));
       } else {
-        // if movie is not liked yet, like it
         await likeMovie(movie, user.id);
         setLikedMovieIds([...likedMovieIds, movie.id]);
       }
@@ -72,7 +70,13 @@ export default function MovieSearch() {
     setSelectedMovie(null);
   };
 
-  const uniqueMovies = movies.map((movie) => ({
+  const uniqueMovies = movies
+  .filter((movie, index, self) => 
+    index === self.findIndex((m) => (
+      m.id === movie.id
+    ))
+  )
+  .map(movie => ({
     ...movie,
     liked: likedMovieIds.includes(movie.id),
   }));

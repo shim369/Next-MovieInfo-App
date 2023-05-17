@@ -50,8 +50,7 @@ const UserProfile = () => {
     switch (currentComponent) {
       case 'MovieSearch':
         return (
-          <MovieSearch
-          />
+          <MovieSearch />
         );
       case 'UserInfo':
         return (
