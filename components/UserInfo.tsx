@@ -71,7 +71,7 @@ const UserInfo = ({ onNicknameUpdate }: UserInfoProps) => {
 
   return (
     <>
-      <div className="flex justify-between flex-col md:flex-row">
+      <div className="flex justify-between flex-col md:flex-row-reverse">
         <div className="like-box flex-grow md:flex-grow-0 md:flex-shrink-0 md:w-8/10 bg-white p-5">
           <h2 className="text-lg"><span className="bg-white">お気に入り</span></h2>
           <div className={styles.movieList}>
