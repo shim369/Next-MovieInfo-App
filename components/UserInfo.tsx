@@ -73,7 +73,7 @@ const UserInfo = ({ onNicknameUpdate }: UserInfoProps) => {
     <>
       <div className="flex justify-between flex-col md:flex-row">
         <div className="like-box flex-grow md:flex-grow-0 md:flex-shrink-0 md:w-8/10 bg-white p-5">
-          <h2 className="text-lg"><span className="bg-white">お気に入りの映画</span></h2>
+          <h2 className="text-lg"><span className="bg-white">お気に入り</span></h2>
           <div className={styles.movieList}>
             {likedMovies.map((movie) => (
               <div key={movie.id} className={`${styles.movieItem} relative`}>
