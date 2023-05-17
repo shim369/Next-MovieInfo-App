@@ -71,21 +71,7 @@ const UserInfo = ({ onNicknameUpdate }: UserInfoProps) => {
 
   return (
     <>
-      <div className="flex justify-between flex-col md:flex-row-reverse">
-        <div className="like-box flex-grow md:flex-grow-0 md:flex-shrink-0 md:w-8/10 bg-white p-5">
-          <h2 className="text-lg"><span className="bg-white">お気に入り</span></h2>
-          <div className={styles.movieList}>
-            {likedMovies.map((movie) => (
-              <div key={movie.id} className={`${styles.movieItem} relative`}>
-                <img
-                  src={`https://image.tmdb.org/t/p/w400${movie.poster_path}`}
-                  alt={movie.title}
-                  onClick={() => handleMovieClick(movie.id)}
-                />
-              </div>
-            ))}
-          </div>
-        </div>
+      <div className="flex justify-between flex-col md:flex-row">
         <div className="profile-box flex-grow md:flex-grow-0 md:flex-shrink-0 md:w-1.9/10 bg-white p-5">
           {userData?.avatar_url ? (
             <img
@@ -107,6 +93,20 @@ const UserInfo = ({ onNicknameUpdate }: UserInfoProps) => {
               </div>
             </>
           )}
+        </div>
+        <div className="like-box flex-grow md:flex-grow-0 md:flex-shrink-0 md:w-8/10 bg-white p-5">
+          <h2 className="text-lg"><span className="bg-white">お気に入り</span></h2>
+          <div className={styles.movieList}>
+            {likedMovies.map((movie) => (
+              <div key={movie.id} className={`${styles.movieItem} relative`}>
+                <img
+                  src={`https://image.tmdb.org/t/p/w400${movie.poster_path}`}
+                  alt={movie.title}
+                  onClick={() => handleMovieClick(movie.id)}
+                />
+              </div>
+            ))}
+          </div>
         </div>
       </div>
       {selectedMovie && (
